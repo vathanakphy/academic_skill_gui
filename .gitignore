@@ -1,0 +1,26 @@
+# Ignore NetBeans project directory files
+nbproject/
+
+# Ignore build directories
+/build/
+/dist/
+
+# Ignore user-specific configuration files 
+*.user
+*.suo
+*.swp
+.idea/
+
+# Ignore Java class files
+*.class
+
+# Ignore temporary files
+*.log
+*.bak
+*.tmp
+
+# Ignore Maven directories (if using Maven)
+target/
+
+# Ignore IDE specific files (NetBeans)
+*.iml
