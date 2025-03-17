@@ -21,7 +21,7 @@ public class TestTeacherControlCourse {
         "Mathematics");
         
         AcademicControl ac = new AcademicControl();
-        Course c = new Course("C++ And OOP", "CPP", 60.0f, "Basic Level");
+        Course c = new Course("C++ And OOP", "CPP","sds", 60.0f, "Basic Level");
         CourseInstance clas = new CourseInstance(c, t2, 2022, 2, "1");
         System.out.println("\n===== Course Management System =====");
         

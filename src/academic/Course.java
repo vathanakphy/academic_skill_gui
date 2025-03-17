@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import core.Form;
-import core.MySQLConnection;
+import core.*;
 import exception.NumberRangeExceptionHandling;
 import java.util.Scanner;
 public class Course {
@@ -15,7 +15,7 @@ public class Course {
     private int courseId;
     
     public String name; //graphic design
-    // public String level;
+    public String level;
     public String description;
 
     public int getCourseId() {
@@ -27,15 +27,15 @@ public class Course {
     public static HashMap<Integer, Course> listCourses = new HashMap<>();
 
     //constructor 
-    public Course(String name, String shortName, float fee, String description) {
+    public Course(String name, String shortName, String level ,float fee, String description) {
         totalCourse += 1;
         this.courseId = totalCourse;
         this.name = name;
         this.shortName = shortName;
-        // this.level = level;
+        this.level = level;
         this.fee = fee;
         this.description = description;
-        listCourses.put(courseId, this);
+        Course.listCourses.put(courseId, this);
     }
     
     // @Override
@@ -48,7 +48,7 @@ public class Course {
         return "Course ID: " + courseId + "\n" +
                "Name: " + name + "\n" +
                "Short Name: " + shortName + "\n" +
-            //    "Level: " + level + "\n" +
+               "Level: " + level + "\n" +
                "Fee: $" + fee + "\n" +
                "Description: " + description;
     }
@@ -60,6 +60,14 @@ public class Course {
             if (course.shortName.equalsIgnoreCase(shortName)) {
                 return course;
             }
+        }
+        return null;
+    }
+    public static Course findCourseByName(String name) {
+        for (Course course : Course.listCourses.values()) {
+            if (course.name.equalsIgnoreCase(name)) {
+                return course;
+            }       
         }
         return null;
     }
@@ -100,7 +108,20 @@ public class Course {
         if(result!=null){
             try{
                 if(result.next()){
-                    Course c = new Course(result.getString("name"), result.getString("short_name"), result.getFloat("fee"), result.getString("description"));
+                    Course c = new Course(result.getString("name"), result.getString("short_name"),result.getString("level"), result.getFloat("fee"), result.getString("description"));
+                }
+            }catch(SQLException sql){
+                System.out.println("Course Not found" + sql.getMessage());
+            }
+        }
+    }
+    public static void syncCourse(){
+        String query = "SELECT * FROM Course;";
+        ResultSet result = MySQLConnection.executeQuery(query);
+        if(result!=null){
+            try{
+                while(result.next()){
+                    Course c = new Course(result.getString("name"), result.getString("short_name"),result.getString("level"), result.getFloat("fee"), result.getString("description"));
                 }
             }catch(SQLException sql){
                 System.out.println("Course Not found" + sql.getMessage());
@@ -135,7 +156,14 @@ public class Course {
         System.out.println(course);
         return course.updateCourseData();
     }
-
-
+    public Object[] toObjectArray() {
+        return new Object[]{
+            this.name, 
+            this.shortName, 
+            this.level, 
+            this.fee, 
+            this.description
+        };
+    }
 
 }

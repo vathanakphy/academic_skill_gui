@@ -218,7 +218,7 @@ public class CourseInstance {
     }
     private static ArrayList<String> getStudentList(int y,int t,String g,String short_name){
         String query = "SELECT student_id FROM Enrollment WHERE course_instance_id = (SELECT course_instance_id FROM Course_instance WHERE year = "+y+" AND term = "+t+" AND group_s = '"+g+"' AND short_name = '"+short_name+"');";
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         ResultSet result =  MySQLConnection.executeQuery(query);
         if(result!=null){
             try{
@@ -319,7 +319,7 @@ public class CourseInstance {
     //     return score;
     // }
 
-    public void getResultForStudent(){
-
+    public String basicInfor(){
+        return keyIdentical + " " + course.name + " " + User.listUser.get(teacherID).getName();
     }
 }

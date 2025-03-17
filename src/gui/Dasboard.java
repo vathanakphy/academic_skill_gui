@@ -6,6 +6,7 @@ package gui;
 
 import core.*;
 import user.*;
+//import javax.swing.*;
 /**
  *
  * @author vathanak
@@ -16,15 +17,21 @@ public class Dasboard extends javax.swing.JFrame {
      */
     AdminHome h = new AdminHome();
     CreateUser c = new CreateUser();
+    CreateCourse newC = new CreateCourse();
+    CreateClass newClass = new CreateClass();
     ResetUI reset = new ResetUI();
     public Dasboard() {
         initComponents();
         MianContent.add(h);
         MianContent.add(c);
         MianContent.add(reset);
+        MianContent.add(newC);
+        MianContent.add(newClass);
         h.setVisible(true);
         c.setVisible(false);
         reset.setVisible(false);
+        newC.setVisible(false);
+        newClass.setVisible(false);
         
     }
 
@@ -44,7 +51,7 @@ public class Dasboard extends javax.swing.JFrame {
         home = new javax.swing.JButton();
         createUser = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        createClass = new javax.swing.JButton();
+        createCourse = new javax.swing.JButton();
         createClass1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         MianContent = new javax.swing.JLayeredPane();
@@ -100,18 +107,18 @@ public class Dasboard extends javax.swing.JFrame {
             }
         });
 
-        createClass.setBackground(new java.awt.Color(51, 153, 255));
-        createClass.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        createClass.setForeground(new java.awt.Color(255, 255, 255));
-        createClass.setText("Create Course");
-        createClass.addFocusListener(new java.awt.event.FocusAdapter() {
+        createCourse.setBackground(new java.awt.Color(51, 153, 255));
+        createCourse.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        createCourse.setForeground(new java.awt.Color(255, 255, 255));
+        createCourse.setText("Create Course");
+        createCourse.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                createClassFocusLost(evt);
+                createCourseFocusLost(evt);
             }
         });
-        createClass.addActionListener(new java.awt.event.ActionListener() {
+        createCourse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createClassActionPerformed(evt);
+                createCourseActionPerformed(evt);
             }
         });
 
@@ -138,7 +145,7 @@ public class Dasboard extends javax.swing.JFrame {
             .addComponent(home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(createUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(createClass1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(createClass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(createCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,7 +164,7 @@ public class Dasboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(resentPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(createClass, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(createClass1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -211,19 +218,30 @@ public class Dasboard extends javax.swing.JFrame {
 
     private void createClass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createClass1ActionPerformed
         // TODO add your handling code here:
+        h.setVisible(false);
+        c.setVisible(false);
+        reset.setVisible(false);
+        newC.setVisible(false);
+        newClass.setVisible(true);
     }//GEN-LAST:event_createClass1ActionPerformed
 
     private void createClass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createClass1FocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_createClass1FocusLost
 
-    private void createClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createClassActionPerformed
+    private void createCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCourseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_createClassActionPerformed
+        h.setVisible(false);
+        c.setVisible(false);
+        reset.setVisible(false);
+        newC.setVisible(true);
+        newClass.setVisible(false);
+    }//GEN-LAST:event_createCourseActionPerformed
 
-    private void createClassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createClassFocusLost
+    private void createCourseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createCourseFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_createClassFocusLost
+        
+    }//GEN-LAST:event_createCourseFocusLost
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -234,13 +252,17 @@ public class Dasboard extends javax.swing.JFrame {
         h.setVisible(false);
         c.setVisible(true);
         reset.setVisible(false);
+        newC.setVisible(false);
+        newClass.setVisible(false);
     }//GEN-LAST:event_createUserActionPerformed
 
     private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
         // TODO add your handling code here:
         h.setVisible(true);
-        c.setVisible(false);
+        c.setVisible(false);    
         reset.setVisible(false);
+        newC.setVisible(false);
+        newClass.setVisible(false);
     }//GEN-LAST:event_homeActionPerformed
 
     private void resentPasswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resentPasswdActionPerformed
@@ -248,6 +270,8 @@ public class Dasboard extends javax.swing.JFrame {
         h.setVisible(false);
         c.setVisible(false);
         reset.setVisible(true);
+        newC.setVisible(false);
+        newClass.setVisible(false);
     }//GEN-LAST:event_resentPasswdActionPerformed
 
     /**
@@ -268,16 +292,10 @@ public class Dasboard extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Dasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+//        </editor-fold>
         if (args != null && args.length == 2) {
             String email = args[0];   // Email passed as the first argument
             String password = args[1]; // Password passed as the second argument
@@ -296,8 +314,8 @@ public class Dasboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane MianContent;
-    private javax.swing.JButton createClass;
     private javax.swing.JButton createClass1;
+    private javax.swing.JButton createCourse;
     private javax.swing.JButton createUser;
     private javax.swing.JButton home;
     private javax.swing.JButton jButton4;

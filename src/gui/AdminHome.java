@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package gui;
+import academic.Course;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 import user.*;
@@ -38,13 +39,13 @@ public class AdminHome extends javax.swing.JPanel {
         jScrollPane6 = new javax.swing.JScrollPane();
         allStu = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        courseTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 255, 255));
 
-        allUser.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        allUser.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         allUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -53,11 +54,12 @@ public class AdminHome extends javax.swing.JPanel {
                 "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "Other"
             }
         ));
+        allUser.setRowHeight(45);
         jScrollPane2.setViewportView(allUser);
 
         displayAll.addTab("All", jScrollPane2);
 
-        AllTeacher.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        AllTeacher.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         AllTeacher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -66,11 +68,12 @@ public class AdminHome extends javax.swing.JPanel {
                 "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "Other"
             }
         ));
+        AllTeacher.setRowHeight(45);
         jScrollPane5.setViewportView(AllTeacher);
 
         displayAll.addTab("Teacher", jScrollPane5);
 
-        allStu.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        allStu.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         allStu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -79,22 +82,22 @@ public class AdminHome extends javax.swing.JPanel {
                 "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "Other"
             }
         ));
+        allStu.setRowHeight(45);
         jScrollPane6.setViewportView(allStu);
 
         displayAll.addTab("Student", jScrollPane6);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        courseTable.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
+        courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Short Name", "title", "fee", "level", "discription"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        courseTable.setRowHeight(45);
+        jScrollPane1.setViewportView(courseTable);
 
         displayAll.addTab("Course", jScrollPane1);
 
@@ -106,9 +109,10 @@ public class AdminHome extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Teacher", "Class"
             }
         ));
+        jTable2.setRowHeight(45);
         jScrollPane3.setViewportView(jTable2);
 
         displayAll.addTab("Class", jScrollPane3);
@@ -129,6 +133,7 @@ public class AdminHome extends javax.swing.JPanel {
     private javax.swing.JTable AllTeacher;
     private javax.swing.JTable allStu;
     private javax.swing.JTable allUser;
+    private javax.swing.JTable courseTable;
     private javax.swing.JTabbedPane displayAll;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -136,19 +141,23 @@ public class AdminHome extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
     private void addRowsToTables() {
         Student.loadAllStudent();
-        Teacher.loadAllTeacher();   
-        
+        Teacher.loadAllTeacher();
+        Course.listCourses.clear();
+        Course.syncCourse();
+        System.out.println(Course.listCourses.size());
         // Get Table Models
         DefaultTableModel teacherModel = (DefaultTableModel) AllTeacher.getModel();
         DefaultTableModel studentModel = (DefaultTableModel) allStu.getModel();
         DefaultTableModel userModel = (DefaultTableModel) allUser.getModel();
-
+        DefaultTableModel courseModel = (DefaultTableModel) courseTable.getModel();
         
+        for(Course c:Course.listCourses.values()){
+            courseModel.addRow(c.toObjectArray());
+        }
         // Add Rows to Teacher Table
         for (User rowData : User.listUser.values()) {
             if(rowData instanceof Student){

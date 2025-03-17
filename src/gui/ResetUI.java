@@ -111,7 +111,6 @@ public class ResetUI extends javax.swing.JPanel {
                 UserInformation userInfor = new UserInformation(false, stu.getId(), (stu.firstName + " " + stu.lastName), "2025-2-2", "male", stu.getAddress(), stu.getPhoneNumber(), stu.getEmail(), "Student");
                 jLayeredPane1.add(userInfor);
                 userInfor.setVisible(true);
-
             }
         }else{
                     searchUserID.setText("");

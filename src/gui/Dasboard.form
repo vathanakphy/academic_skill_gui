@@ -88,7 +88,7 @@
                   <Component id="home" alignment="1" max="32767" attributes="0"/>
                   <Component id="createUser" alignment="0" max="32767" attributes="0"/>
                   <Component id="createClass1" alignment="1" max="32767" attributes="0"/>
-                  <Component id="createClass" alignment="0" max="32767" attributes="0"/>
+                  <Component id="createCourse" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -109,7 +109,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="resentPasswd" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="createClass" min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="createCourse" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="createClass1" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -199,7 +199,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="createClass">
+            <Component class="javax.swing.JButton" name="createCourse">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -213,8 +213,8 @@
                 <Property name="text" type="java.lang.String" value="Create Course"/>
               </Properties>
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="createClassFocusLost"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createClassActionPerformed"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="createCourseFocusLost"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createCourseActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="createClass1">

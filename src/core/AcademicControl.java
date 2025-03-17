@@ -16,14 +16,14 @@ public class AcademicControl {
             String name = input.nextLine();
             System.out.print("Enter Short Name: ");
             String shortName = input.next();
-            // System.out.print("Enter Level: ");
-            // String level = input.next();
+             System.out.print("Enter Level: ");
+             String level = input.next();
             System.out.print("Enter Fee: ");
             float fee = (float) Form.inputNumber();
             input.nextLine();
             System.out.print("Enter Description: ");
             String description = input.nextLine();    
-            Course c = new Course(name, shortName, fee, description);
+            Course c = new Course(name, shortName,level, fee, description);
             return true;
         }
     }

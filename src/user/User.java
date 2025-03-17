@@ -110,6 +110,9 @@ public abstract class User {
         }
     }
 
+    public String getName(){
+        return firstName + " "+lastName;
+    }
     public String getEmail() {
         return email;
     }

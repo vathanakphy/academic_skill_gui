@@ -161,4 +161,7 @@ public class Teacher extends User {
             this.getEmail(), this.getPhoneNumber(), "M", this.major
         };
     }
+    public String basicInfor (){
+        return getId()+" " + firstName + " " + lastName + " "+major;
+    }
 }
