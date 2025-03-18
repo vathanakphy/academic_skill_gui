@@ -54,49 +54,49 @@ public class Form implements Authentication{
             System.out.println("1 . Teacher");
             System.out.println("2 . Student");
             System.out.print("Choose : ");
-            try{
-                typeOfAccount = inputInteger();
-                NumberRangeExceptionHandling userType = new NumberRangeExceptionHandling(1,TYPE_OF_USER,typeOfAccount);
+            // try{
+            //     typeOfAccount = inputInteger();
+            //     NumberRangeExceptionHandling userType = new NumberRangeExceptionHandling(1,TYPE_OF_USER,typeOfAccount);
                 
-                System.out.print("First Name   : ");
-                firstName = input.next();
-                StringFilterException f_name = new StringFilterException(firstName,"^[A-Za-z]+$","Alphabet Only");             
-                System.out.print("Last Name    : ");
+            //     System.out.print("First Name   : ");
+            //     firstName = input.next();
+            //     StringFilterException f_name = new StringFilterException(firstName,"^[A-Za-z]+$","Alphabet Only");             
+            //     System.out.print("Last Name    : ");
 
-                lastName = input.next();
-                StringFilterException l_name = new StringFilterException(lastName,"^[A-Za-z]+$","Alphabet Only");             
-                input.nextLine();
+            //     lastName = input.next();
+            //     StringFilterException l_name = new StringFilterException(lastName,"^[A-Za-z]+$","Alphabet Only");             
+            //     input.nextLine();
         
-                System.out.print("Address      : ");
-                address = input.nextLine(); 
+            //     System.out.print("Address      : ");
+            //     address = input.nextLine(); 
         
-                System.out.print("Phone Number : ");
-                phoneNumber = input.next();
-                StringFilterException phone = new StringFilterException(phoneNumber,"^0[1-9]\\d{6,12}$","Invalid Phone Numebr Format");
+            //     System.out.print("Phone Number : ");
+            //     phoneNumber = input.next();
+            //     StringFilterException phone = new StringFilterException(phoneNumber,"^0[1-9]\\d{6,12}$","Invalid Phone Numebr Format");
 
-                switch (typeOfAccount) {
-                    case 1:
-                        // Teacher
-                        System.out.print("Major        : ");
-                        role_major = input.next();
-                        StringFilterException major = new StringFilterException(role_major, "^[A-Za-z]+([ -&][A-Za-z]+)*$", "Spcial character is not Allowed");
-                        Teacher teach = new Teacher(firstName, lastName, address, phoneNumber, role_major);
-                        break;
-                    case 2:
-                        // Student
-                        Student stu = new Student(firstName, lastName, address, phoneNumber);
-                        System.out.println("Student registered successfully!");
-                        break;
-                    default:
-                        System.out.println("Invalid user type! Registration failed.");
-                        return false;
-                }
-                return true;
-            }catch(IllegalArgumentException registerCheck){
-                f.clearScreen();
-                System.out.println(registerCheck.getMessage());
-                inputStats = false;
-            }
+            //     switch (typeOfAccount) {
+            //         case 1:
+            //             // Teacher
+            //             System.out.print("Major        : ");
+            //             role_major = input.next();
+            //             StringFilterException major = new StringFilterException(role_major, "^[A-Za-z]+([ -&][A-Za-z]+)*$", "Spcial character is not Allowed");
+            //             Teacher teach = new Teacher(firstName, lastName, address, phoneNumber, role_major);
+            //             break;
+            //         case 2:
+            //             // Student
+            //             Student stu = new Student(firstName, lastName, address, phoneNumber);
+            //             System.out.println("Student registered successfully!");
+            //             break;
+            //         default:
+            //             System.out.println("Invalid user type! Registration failed.");
+            //             return false;
+            //     }
+            //     return true;
+            // }catch(IllegalArgumentException registerCheck){
+            //     f.clearScreen();
+            //     System.out.println(registerCheck.getMessage());
+            //     inputStats = false;
+            // }
         }while (!inputStats) ;
         return false;
     }
@@ -166,14 +166,16 @@ public class Form implements Authentication{
                     String firstName = result.getString("first_name");
                     String lastName = result.getString("last_name");
                     String address = result.getString("address");
+                    String gender = result.getString("address");
+                    String national_id = result.getString("address");
                     if (userEmail.endsWith("@stu.kdc.edu")){
                         boolean status = result.getBoolean("status");
-                        Student user = new Student(userId, firstName,lastName, address, phone, userEmail, userPassword,status);
+                        Student user = new Student(userId, firstName,lastName,gender,national_id, address, phone, userEmail, userPassword,status);
                         return user;
                     }else if(userEmail.endsWith("@tch.kdc.edu")){
                         boolean status = result.getBoolean("status");
                         String major = result.getString("role_major");
-                        Teacher user = new Teacher( userId, firstName,lastName,  address,  phone, userEmail, userPassword, major,status);
+                        Teacher user = new Teacher( userId, firstName,lastName,gender,national_id,  address,  phone, userEmail, userPassword, major,status);
                         return user;
                     }else if(userEmail.endsWith("@adm.kdc.edu")){
                         Admin adm = new Admin(userId,firstName,lastName,address,phone,userEmail,userPassword);

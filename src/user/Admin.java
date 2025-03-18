@@ -9,12 +9,12 @@ public class Admin extends User {
     public String id = "A";
 
     public Admin(String firstName, String lastName, String address, String phoneNumber) {
-        super(firstName, lastName, address, phoneNumber, EMAIL_FORMAT);
+        super(firstName, lastName,"NA","NA", address, phoneNumber, EMAIL_FORMAT);
         id +=(String.valueOf(++numberOfAdmin));
         User.listUser.put(this.id, this);
     }
     public Admin(String id,String firstName, String lastName, String address, String phoneNumber,String email,String password) {
-        super(firstName, lastName, address, phoneNumber, email, password);
+        super(firstName, lastName,"NA","NA", address, phoneNumber, email, password);
         this.id = id;
         User.listUser.put(this.id, this);
     }

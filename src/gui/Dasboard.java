@@ -7,11 +7,13 @@ package gui;
 import core.*;
 import user.*;
 //import javax.swing.*;
+
 /**
  *
  * @author vathanak
  */
 public class Dasboard extends javax.swing.JFrame {
+
     /**
      * Creates new form Dasboard
      */
@@ -20,6 +22,8 @@ public class Dasboard extends javax.swing.JFrame {
     CreateCourse newC = new CreateCourse();
     CreateClass newClass = new CreateClass();
     ResetUI reset = new ResetUI();
+    StudentEnrolment stuEnroll = new StudentEnrolment();
+
     public Dasboard() {
         initComponents();
         MianContent.add(h);
@@ -27,12 +31,14 @@ public class Dasboard extends javax.swing.JFrame {
         MianContent.add(reset);
         MianContent.add(newC);
         MianContent.add(newClass);
-        h.setVisible(true);
+        MianContent.add(stuEnroll);
+        h.setVisible(false);
         c.setVisible(false);
         reset.setVisible(false);
         newC.setVisible(false);
         newClass.setVisible(false);
-        
+        stuEnroll.setVisible(false);
+
     }
 
     /**
@@ -49,8 +55,8 @@ public class Dasboard extends javax.swing.JFrame {
         userType = new javax.swing.JLabel();
         resentPasswd = new javax.swing.JButton();
         home = new javax.swing.JButton();
+        stuEnrollment = new javax.swing.JButton();
         createUser = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         createCourse = new javax.swing.JButton();
         createClass1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -87,6 +93,16 @@ public class Dasboard extends javax.swing.JFrame {
             }
         });
 
+        stuEnrollment.setBackground(new java.awt.Color(51, 153, 255));
+        stuEnrollment.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        stuEnrollment.setForeground(new java.awt.Color(255, 255, 255));
+        stuEnrollment.setText("Student Enrollment");
+        stuEnrollment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stuEnrollmentActionPerformed(evt);
+            }
+        });
+
         createUser.setBackground(new java.awt.Color(51, 153, 255));
         createUser.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         createUser.setForeground(new java.awt.Color(255, 255, 255));
@@ -94,16 +110,6 @@ public class Dasboard extends javax.swing.JFrame {
         createUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createUserActionPerformed(evt);
-            }
-        });
-
-        jButton4.setBackground(new java.awt.Color(51, 153, 255));
-        jButton4.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Student Enrollment");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
             }
         });
 
@@ -146,7 +152,7 @@ public class Dasboard extends javax.swing.JFrame {
             .addComponent(createUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(createClass1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(createCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(stuEnrollment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(userType)
@@ -168,7 +174,7 @@ public class Dasboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(createClass1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(stuEnrollment, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(103, Short.MAX_VALUE))
         );
 
@@ -223,6 +229,7 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(false);
         newC.setVisible(false);
         newClass.setVisible(true);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_createClass1ActionPerformed
 
     private void createClass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createClass1FocusLost
@@ -236,16 +243,23 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(false);
         newC.setVisible(true);
         newClass.setVisible(false);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_createCourseActionPerformed
 
     private void createCourseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createCourseFocusLost
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_createCourseFocusLost
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void stuEnrollmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuEnrollmentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        h.setVisible(false);
+        c.setVisible(false);
+        reset.setVisible(false);
+        newC.setVisible(false);
+        newClass.setVisible(false);
+        stuEnroll.setVisible(true);
+    }//GEN-LAST:event_stuEnrollmentActionPerformed
 
     private void createUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserActionPerformed
         // TODO add your handling code here:
@@ -254,15 +268,17 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(false);
         newC.setVisible(false);
         newClass.setVisible(false);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_createUserActionPerformed
 
     private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
         // TODO add your handling code here:
         h.setVisible(true);
-        c.setVisible(false);    
+        c.setVisible(false);
         reset.setVisible(false);
         newC.setVisible(false);
         newClass.setVisible(false);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_homeActionPerformed
 
     private void resentPasswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resentPasswdActionPerformed
@@ -272,6 +288,7 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(true);
         newC.setVisible(false);
         newClass.setVisible(false);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_resentPasswdActionPerformed
 
     /**
@@ -299,7 +316,7 @@ public class Dasboard extends javax.swing.JFrame {
         if (args != null && args.length == 2) {
             String email = args[0];   // Email passed as the first argument
             String password = args[1]; // Password passed as the second argument
-            admin = (Admin)form.loadData(email, password);
+            admin = (Admin) form.loadData(email, password);
         } else {
             System.out.println("Invalid arguments. Please pass email and password.");
         }
@@ -318,11 +335,12 @@ public class Dasboard extends javax.swing.JFrame {
     private javax.swing.JButton createCourse;
     private javax.swing.JButton createUser;
     private javax.swing.JButton home;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton resentPasswd;
+    private javax.swing.JButton stuEnrollment;
     private javax.swing.JLabel userType;
     // End of variables declaration//GEN-END:variables
+    // Function to set visibility of components
 }

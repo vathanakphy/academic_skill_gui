@@ -13,10 +13,10 @@ public abstract class User {
     static int numberOfUser = 0;
     public String lastName;
     public String firstName;
-
     protected LocalDate dob;
     protected String address;
-
+    protected String gender;
+    protected String nationalID;
     private String email;
     private String phoneNumber;
     private String password;
@@ -25,9 +25,11 @@ public abstract class User {
     public static HashMap<String, User> listUser = new HashMap<String, User>();
 
     // login
-    public User(String firstName, String lastName, String address, String phoneNumber, String email, String password) {
+    public User(String firstName, String lastName,String gender,String nationalID,String address, String phoneNumber, String email, String password) {
         this.lastName = lastName;
         this.firstName = firstName;
+        this.gender = gender;
+        this.nationalID = nationalID;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.dob = LocalDate.now(); // need to input later
@@ -41,10 +43,12 @@ public abstract class User {
     }
 
     // register
-    public User(String firstName, String lastName, String address, String phoneNumber, String emailFormat) {
+    public User(String firstName, String lastName,String gender,String nationalID, String address, String phoneNumber, String emailFormat) {
         ++numberOfUser;
         this.lastName = lastName;
         this.firstName = firstName;
+        this.gender = gender;
+        this.nationalID = nationalID;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.dob = LocalDate.now(); // need to input later

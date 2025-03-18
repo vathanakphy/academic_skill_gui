@@ -78,32 +78,22 @@ public class CourseInstance {
         return listStudent;
     }
 
-    public boolean studentEnrollment(User user) {
-        if (!(user instanceof Admin)) {
-            System.out.println("Permission Denied: Only Admins");
-            return false;
-        } else {
-            System.out.println("Student Enrollment ");
-            System.out.print("Student ID : ");
-            String stuID = input.next();
+    public boolean studentEnrollment(String stuID) {
+            stuID = input.next();
             //Need add trycatch
             Student stu = (Student) User.listUser.get(stuID);
-            if (stu != null) {
-                listStudent.add(stuID);
-                listStudentName.put(stuID,stu.firstName + " " + stu.lastName );
-                Student s = (Student)User.listUser.get(stuID);
-                s.addCourseStudy(user,this.keyIdentical);
+            listStudent.add(stuID);
+            listStudentName.put(stuID,stu.firstName + " " + stu.lastName );
+            Student s = (Student)User.listUser.get(stuID);
+            s.addCourseStudy(this.keyIdentical);
 
-                ArrayList<Grading> g = new ArrayList<Grading>();
-                activityScore.put(stuID,g);
+            ArrayList<Grading> g = new ArrayList<Grading>();
+            activityScore.put(stuID,g);
 
-                ArrayList<Attendent> a = new ArrayList<Attendent>();
-                attendentStu.put(stuID, a);
-
-                return true;
-            }
-        }
-        return false;
+            ArrayList<Attendent> a = new ArrayList<Attendent>();
+            attendentStu.put(stuID, a);
+        
+            return true;
     }
 
     // private void allocateScoreForStudnet( HashMap<String, Float> listStu){
