@@ -51,7 +51,7 @@ public class AdminHome extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "Other"
+                "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "national_id", "Other"
             }
         ));
         allUser.setRowHeight(45);
@@ -65,7 +65,7 @@ public class AdminHome extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "Other"
+                "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "national_id", "Other"
             }
         ));
         AllTeacher.setRowHeight(45);
@@ -79,7 +79,7 @@ public class AdminHome extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "Other"
+                "ID", "Name", "DOB", "Address", "Email", "Phone", "Gender", "national_id", "Other"
             }
         ));
         allStu.setRowHeight(45);

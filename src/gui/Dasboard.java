@@ -7,11 +7,13 @@ package gui;
 import core.*;
 import user.*;
 //import javax.swing.*;
+
 /**
  *
  * @author vathanak
  */
 public class Dasboard extends javax.swing.JFrame {
+
     /**
      * Creates new form Dasboard
      */
@@ -20,6 +22,8 @@ public class Dasboard extends javax.swing.JFrame {
     CreateCourse newC = new CreateCourse();
     CreateClass newClass = new CreateClass();
     ResetUI reset = new ResetUI();
+    StudentEnrolment stuEnroll = new StudentEnrolment();
+
     public Dasboard() {
         initComponents();
         MianContent.add(h);
@@ -27,12 +31,14 @@ public class Dasboard extends javax.swing.JFrame {
         MianContent.add(reset);
         MianContent.add(newC);
         MianContent.add(newClass);
-        h.setVisible(true);
+        MianContent.add(stuEnroll);
+        h.setVisible(false);
         c.setVisible(false);
         reset.setVisible(false);
         newC.setVisible(false);
         newClass.setVisible(false);
-        
+        stuEnroll.setVisible(false);
+
     }
 
     /**
@@ -48,6 +54,7 @@ public class Dasboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         home = new javax.swing.JButton();
+        stuEnrollment = new javax.swing.JButton();
         createUser = new javax.swing.JButton();
         resentPasswd = new javax.swing.JButton();
         createCourse = new javax.swing.JButton();
@@ -288,6 +295,7 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(false);
         newC.setVisible(false);
         newClass.setVisible(true);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_createClass1ActionPerformed
 
     private void createClass1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createClass1FocusLost
@@ -301,15 +309,22 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(false);
         newC.setVisible(true);
         newClass.setVisible(false);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_createCourseActionPerformed
 
     private void createCourseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createCourseFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_createCourseFocusLost
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void stuEnrollmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stuEnrollmentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        h.setVisible(false);
+        c.setVisible(false);
+        reset.setVisible(false);
+        newC.setVisible(false);
+        newClass.setVisible(false);
+        stuEnroll.setVisible(true);
+    }//GEN-LAST:event_stuEnrollmentActionPerformed
 
     private void createUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserActionPerformed
         // TODO add your handling code here:
@@ -318,6 +333,7 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(false);
         newC.setVisible(false);
         newClass.setVisible(false);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_createUserActionPerformed
 
     private void homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeActionPerformed
@@ -327,6 +343,7 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(false);
         newC.setVisible(false);
         newClass.setVisible(false);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_homeActionPerformed
 
     private void resentPasswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resentPasswdActionPerformed
@@ -336,6 +353,7 @@ public class Dasboard extends javax.swing.JFrame {
         reset.setVisible(true);
         newC.setVisible(false);
         newClass.setVisible(false);
+        stuEnroll.setVisible(false);
     }//GEN-LAST:event_resentPasswdActionPerformed
 
     /**
@@ -363,7 +381,7 @@ public class Dasboard extends javax.swing.JFrame {
         if (args != null && args.length == 2) {
             String email = args[0];   // Email passed as the first argument
             String password = args[1]; // Password passed as the second argument
-            admin = (Admin)form.loadData(email, password);
+            admin = (Admin) form.loadData(email, password);
         } else {
             System.out.println("Invalid arguments. Please pass email and password.");
         }
@@ -381,7 +399,6 @@ public class Dasboard extends javax.swing.JFrame {
     private javax.swing.JButton createCourse;
     private javax.swing.JButton createUser;
     private javax.swing.JButton home;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
@@ -389,6 +406,8 @@ public class Dasboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton resentPasswd;
+    private javax.swing.JButton stuEnrollment;
     private javax.swing.JLabel userType;
     // End of variables declaration//GEN-END:variables
+    // Function to set visibility of components
 }

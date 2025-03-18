@@ -27,8 +27,8 @@ public class Teacher extends User {
     // Teacher (User user,String major,ArrayList<String> teaching){
     //     this = (Teacher) user;
     // }
-    public Teacher(String id,String firstName, String lastName, String address, String phoneNumber,String email,String password,String major,boolean status) {
-        super(firstName,lastName, address, phoneNumber,email,password);
+    public Teacher(String id,String firstName, String lastName,String gender,String nationalID , String address, String phoneNumber,String email,String password,String major,boolean status) {
+        super(firstName,lastName, gender, nationalID, address, phoneNumber,email,password);
         this.id = id;
         this.major = major;
         this.status = true;
@@ -38,8 +38,8 @@ public class Teacher extends User {
         User.listUser.put(this.id, this);
     }
     // register
-    public Teacher(String firstName,String lastName, String address, String phoneNumber, String major) {
-        super(firstName,lastName, address, phoneNumber,EMAIL_FORMAT);
+    public Teacher(String firstName,String lastName,String gender,String nationalID ,String address, String phoneNumber, String major) {
+        super(firstName,lastName, gender,nationalID,address, phoneNumber,EMAIL_FORMAT);
         super.id="T";
         super.id +=(String.valueOf(++numberOfTeacher));
         this.major = major;
@@ -141,14 +141,15 @@ public class Teacher extends User {
                     String userPassword = result.getString("password");
                     String firstName = result.getString("first_name");
                     String lastName = result.getString("last_name");
+                    String gender = result.getString("gender");
+                    String national_d  = result.getString("national_id");
                     String address = result.getString("address");
                     boolean status = result.getBoolean("status");
-                    String major = result.getString("role_major");
-                    @SuppressWarnings("unused")
-                    Teacher user = new Teacher( userId, firstName,lastName,  address,  phone, userEmail, userPassword, major,status);              
+                    String major = result.getString("major");
+                    Teacher user = new Teacher( userId, firstName,lastName,gender,national_d,  address,  phone, userEmail, userPassword, major,status);              
                 } 
             }catch(SQLException s){
-                
+              s.printStackTrace();
             }
         }else{
             System.out.println("Fail to Load Data ");
@@ -158,7 +159,7 @@ public class Teacher extends User {
     public Object[] toObjectArray() {
         return new Object[]{
             this.getId(),(this.firstName + " " + this.lastName), this.dob, this.address,
-            this.getEmail(), this.getPhoneNumber(), "M", this.major
+            this.getEmail(), this.getPhoneNumber(), gender,nationalID, this.major
         };
     }
     public String basicInfor (){

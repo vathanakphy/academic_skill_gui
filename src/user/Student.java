@@ -23,8 +23,8 @@ public class Student  extends User{
         super(email, password);
     }
 
-    public Student(String id,String firstName, String lastName, String address, String phoneNumber,String email,String password,boolean status) {
-        super(firstName,lastName, address, phoneNumber,email,password);
+    public Student(String id,String firstName, String lastName, String gender,String nationalID, String address, String phoneNumber,String email,String password,boolean status) {
+        super(firstName,lastName,gender,nationalID, address, phoneNumber,email,password);
         this.id = id;
         if(MySQLConnection.testConnection()){
             syncCourse();
@@ -34,8 +34,8 @@ public class Student  extends User{
     }
     
     //register
-    public Student(String firstName, String lastName, String address, String phoneNumber) {
-        super(firstName,lastName, address, phoneNumber,EMAIL_FORMAT);
+    public Student(String firstName,String lastName,String gender,String nationalID, String address, String phoneNumber) {
+        super(firstName,lastName,gender,nationalID, address, phoneNumber,EMAIL_FORMAT);
         super.id="S";
         super.id +=(String.valueOf(++numberOfStudents));
         status = true;
@@ -121,13 +121,9 @@ public class Student  extends User{
         }
     }
     
-    public boolean addCourseStudy(User user,String c_id){
-        if(user instanceof Admin){
+    public void addCourseStudy(String c_id){
             //add validation
             studyCourseID.add(c_id);
-            return true;
-        }
-        return false;
     }
     
     public void remove() {
@@ -199,10 +195,12 @@ public class Student  extends User{
                     String userPassword = result.getString("password");
                     String firstName = result.getString("first_name");
                     String lastName = result.getString("last_name");
+                    String gender  = result.getString("gender");
+                    String national_id = result.getString("national_id");
                     String address = result.getString("address");
                     boolean status = result.getBoolean("status");
                     @SuppressWarnings("unused")
-                    Student user = new Student(userId, firstName,lastName, address, phone, userEmail, userPassword,status);
+                    Student user = new Student(userId, firstName,lastName,gender,national_id, address, phone, userEmail, userPassword,status);
                 }   
             }catch(SQLException s){
                 
@@ -214,7 +212,7 @@ public class Student  extends User{
     public Object[] toObjectArray() {
         return new Object[]{
             this.getId(),(this.firstName + " " + this.lastName), this.dob, this.address,
-            this.getEmail(), this.getPhoneNumber(), "M","Student"
+            this.getEmail(), this.getPhoneNumber(), gender,nationalID,"Student"
         };
     }
 }
