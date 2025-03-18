@@ -56,10 +56,10 @@ public class CreateClass extends javax.swing.JPanel {
 
         jPasswordField1.setText("jPasswordField1");
 
-        setBackground(new java.awt.Color(153, 255, 255));
+        setBackground(new java.awt.Color(0, 51, 102));
 
-        jLabel5.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel5.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Select Teacher");
 
         academic_group.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
@@ -69,8 +69,8 @@ public class CreateClass extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel3.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Term");
 
         academic_term.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
@@ -80,8 +80,8 @@ public class CreateClass extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel4.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Group");
 
         academic_year.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
@@ -91,15 +91,15 @@ public class CreateClass extends javax.swing.JPanel {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel9.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Year");
 
-        jLabel6.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel6.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Select Course");
 
-        createClass.setBackground(new java.awt.Color(51, 102, 255));
+        createClass.setBackground(new java.awt.Color(0, 102, 102));
         createClass.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         createClass.setForeground(new java.awt.Color(255, 255, 255));
         createClass.setText("Create");
@@ -142,11 +142,52 @@ public class CreateClass extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createClass, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(328, 328, 328))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(academic_year, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(academic_term, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(academic_group, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addGap(37, 37, 37)
+                            .addComponent(selectCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(153, Short.MAX_VALUE))
                 .addGap(335, 335, 335))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(196, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                                .addComponent(academic_group, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(academic_term, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(academic_year, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(48, 48, 48)))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
@@ -159,12 +200,16 @@ public class CreateClass extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(selectCourse, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(selectTeacher, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
+                .addGap(61, 61, 61)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
                 .addComponent(createClass, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(121, 121, 121))
                 .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
