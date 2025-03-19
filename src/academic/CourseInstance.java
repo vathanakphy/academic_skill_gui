@@ -21,6 +21,7 @@ public class CourseInstance {
     public int year;
     public int term;
     public String group;
+    public String classRoom;
     protected ArrayList<String> listStudent = new ArrayList<>(30);
     protected HashMap<String,String> listStudentName = new HashMap<>(30); // ID and name
     // private ArrayList<Quizz> quizzes = new ArrayList<Quizz>();
@@ -28,7 +29,7 @@ public class CourseInstance {
     public HashMap<String,ArrayList<Attendent>> attendentStu = new HashMap<>();
     private String keyIdentical;    
     private HashMap<String,ArrayList<Grading>> activityScore =  new HashMap<String,ArrayList<Grading>>();
-
+    
     public CourseInstance(Course course, String teacherID, int year, int term, String group,ArrayList<String> listStudent) {
         this.teacherID = teacherID;
         this.course = course;
@@ -285,6 +286,12 @@ public class CourseInstance {
         System.out.print("\nActivity Score : " );
 
         System.out.println("Total Attendance : ");
+    }
+    public void setClassRoom(String classRoom){
+           this.classRoom = classRoom;
+    }
+    public String getClassRoom(){
+        return  classRoom;
     }
     // private String stuQuizzScore(String stuId){
     //     String score = " ";

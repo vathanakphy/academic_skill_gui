@@ -6,6 +6,7 @@ package gui;
 
 import java.text.Normalizer;
 import core.*;
+import javax.swing.JOptionPane;
 import user.Student;
 import user.Teacher;
 import user.User;
@@ -281,11 +282,15 @@ public class UserInformation extends javax.swing.JPanel {
             tch.resetPassword();
             tch.updateData();
             System.out.println(tch.checkPassword("kdc2025"));
+            JOptionPane.showMessageDialog(null, "Password reset to defult : kdc2025!", "Success",JOptionPane.INFORMATION_MESSAGE);
+            this.removeAll();
         }else if(user instanceof Student){
             Student stu = (Student)user;
             stu.resetPassword();
             stu.updateData();
             System.out.println(stu.checkPassword("kdc2025"));
+            JOptionPane.showMessageDialog(null, "Password reset to defult : kdc2025!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            this.removeAll();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
