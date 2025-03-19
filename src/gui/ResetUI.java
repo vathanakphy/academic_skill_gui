@@ -115,7 +115,7 @@ public class ResetUI extends javax.swing.JPanel {
                 userInfor.setVisible(true);
             }
         }else{
-                    searchUserID.setText("");
+             searchUserID.setText("");
             JOptionPane.showMessageDialog(null, "Cannot Find User by ID!", "Not Found", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

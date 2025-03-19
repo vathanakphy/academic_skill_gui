@@ -160,8 +160,8 @@ public class Course {
         return new Object[]{
             this.name, 
             this.shortName, 
-            this.level, 
             this.fee, 
+            this.level, 
             this.description
         };
     }
