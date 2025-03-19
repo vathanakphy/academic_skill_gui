@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package gui;
-import academic.Course;
+import academic.*;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 import user.*;
@@ -31,7 +31,7 @@ public class AdminHome extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane5 = new javax.swing.JTabbedPane();
-        displayAll = new javax.swing.JTabbedPane();
+        ClassData = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         allUser = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -41,7 +41,7 @@ public class AdminHome extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         courseTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        dataClass = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 255, 255));
 
@@ -57,7 +57,7 @@ public class AdminHome extends javax.swing.JPanel {
         allUser.setRowHeight(45);
         jScrollPane2.setViewportView(allUser);
 
-        displayAll.addTab("All", jScrollPane2);
+        ClassData.addTab("All", jScrollPane2);
 
         AllTeacher.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         AllTeacher.setModel(new javax.swing.table.DefaultTableModel(
@@ -71,7 +71,7 @@ public class AdminHome extends javax.swing.JPanel {
         AllTeacher.setRowHeight(45);
         jScrollPane5.setViewportView(AllTeacher);
 
-        displayAll.addTab("Teacher", jScrollPane5);
+        ClassData.addTab("Teacher", jScrollPane5);
 
         allStu.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         allStu.setModel(new javax.swing.table.DefaultTableModel(
@@ -85,7 +85,7 @@ public class AdminHome extends javax.swing.JPanel {
         allStu.setRowHeight(45);
         jScrollPane6.setViewportView(allStu);
 
-        displayAll.addTab("Student", jScrollPane6);
+        ClassData.addTab("Student", jScrollPane6);
 
         courseTable.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,65 +99,67 @@ public class AdminHome extends javax.swing.JPanel {
         courseTable.setRowHeight(45);
         jScrollPane1.setViewportView(courseTable);
 
-        displayAll.addTab("Course", jScrollPane1);
+        ClassData.addTab("Course", jScrollPane1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        dataClass.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "ID", "Name", "Teacher", "Class"
+                "ID", "Teacher", "Date", "Time"
             }
         ));
-        jTable2.setRowHeight(45);
-        jScrollPane3.setViewportView(jTable2);
+        dataClass.setRowHeight(45);
+        jScrollPane3.setViewportView(dataClass);
 
-        displayAll.addTab("Class", jScrollPane3);
+        ClassData.addTab("Class", jScrollPane3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(displayAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
+            .addComponent(ClassData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(displayAll, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addComponent(ClassData, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable AllTeacher;
+    private javax.swing.JTabbedPane ClassData;
     private javax.swing.JTable allStu;
     private javax.swing.JTable allUser;
     private javax.swing.JTable courseTable;
-    private javax.swing.JTabbedPane displayAll;
+    private javax.swing.JTable dataClass;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
     private void addRowsToTables() {
         Student.loadAllStudent();
         Teacher.loadAllTeacher();
         Course.listCourses.clear();
         Course.syncCourse();
+        CourseInstance.syncCourseInstance();
         System.out.println(Course.listCourses.size());
         // Get Table Models
         DefaultTableModel teacherModel = (DefaultTableModel) AllTeacher.getModel();
         DefaultTableModel studentModel = (DefaultTableModel) allStu.getModel();
         DefaultTableModel userModel = (DefaultTableModel) allUser.getModel();
         DefaultTableModel courseModel = (DefaultTableModel) courseTable.getModel();
-        
+        DefaultTableModel calssModel = (DefaultTableModel) dataClass.getModel();
+        for(CourseInstance cin:CourseInstance.listCourseInstace.values()){
+            calssModel.addRow(cin.toObjectArray());
+        }
         for(Course c:Course.listCourses.values()){
             courseModel.addRow(c.toObjectArray());
         }
+        
         // Add Rows to Teacher Table
         for (User rowData : User.listUser.values()) {
             if(rowData instanceof Student){

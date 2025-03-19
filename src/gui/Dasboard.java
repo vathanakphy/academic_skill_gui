@@ -297,7 +297,8 @@ public class Dasboard extends javax.swing.JFrame {
     public static void main(String args[]) {
         Form form = new Form();
         /* Set the Nimbus look and feel */
-        Admin admin = null;
+        try{
+           Admin admin = null;
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -313,14 +314,16 @@ public class Dasboard extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Dasboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 //        </editor-fold>
-        if (args != null && args.length == 2) {
-            String email = args[0];   // Email passed as the first argument
-            String password = args[1]; // Password passed as the second argument
-            admin = (Admin) form.loadData(email, password);
-        } else {
-            System.out.println("Invalid arguments. Please pass email and password.");
+            if (args != null && args.length == 2) {
+                String email = args[0];   // Email passed as the first argument
+                String password = args[1]; // Password passed as the second argument
+                admin = (Admin) form.loadData(email, password);
+            } else {
+                System.out.println("Invalid arguments. Please pass email and password.");
+            } 
+        }catch(NullPointerException e){
+            System.out.println("Fail");
         }
-        System.out.println(admin);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

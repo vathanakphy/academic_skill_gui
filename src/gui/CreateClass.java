@@ -390,33 +390,33 @@ public class CreateClass extends javax.swing.JPanel {
 
     private void createClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createClassActionPerformed
         // TODO add your handling code here:
-        String yearText = this.academic_year.getText();
-        String termText = this.academic_term.getText();
-        String group = this.academic_group.getText();
-        String tchBasicInfor = (String) this.selectTeacher.getSelectedItem();
-        String tchId = tchBasicInfor.split(" ")[0]; 
-        String courseSortName = (String) this.selectCourse.getSelectedItem();
-        int y = 0;
-        int t = 0;
-        User u = User.listUser.get(tchId);
-        Teacher tch = null;
-        try{
-            tch = (Teacher) u;
-            Course curs = Course.findCourseByName(courseSortName);
-            t = Integer.parseInt(termText);
-            y = Integer.parseInt(yearText);
-            CourseInstance newclass = new CourseInstance(curs, tch, y, t, group);
-            String query = "INSERT INTO Course_instance (year, term, group_s, teacher_id, short_name) VALUES ("+y+", "+t+", '"+group+"', '"+tchId+"', '"+curs.getShortName()+"');";
-            int row = MySQLConnection.executeUpdate(query);
-            if(row!=0){
-                System.out.println("Success");
-            }
-        }catch(ClassCastException c){
-            System.out.println(c.getMessage());
-        }catch(NumberFormatException num){
-            System.err.println(num.getMessage());
-            
-        }
+//        String yearText = this.academic_year.getText();
+//        String termText = this.academic_term.getText();
+//        String group = this.academic_group.getText();
+//        String tchBasicInfor = (String) this.selectTeacher.getSelectedItem();
+//        String tchId = tchBasicInfor.split(" ")[0]; 
+//        String courseSortName = (String) this.selectCourse.getSelectedItem();
+//        int y = 0;
+//        int t = 0;
+//        User u = User.listUser.get(tchId);
+//        Teacher tch = null;
+//        try{
+//            tch = (Teacher) u;
+//            Course curs = Course.findCourseByName(courseSortName);
+//            t = Integer.parseInt(termText);
+//            y = Integer.parseInt(yearText);
+//            CourseInstance newclass = new CourseInstance(curs, tch, y, t, group);
+//            String query = "INSERT INTO Course_instance (year, term, group_s, teacher_id, short_name) VALUES ("+y+", "+t+", '"+group+"', '"+tchId+"', '"+curs.getShortName()+"');";
+//            int row = MySQLConnection.executeUpdate(query);
+//            if(row!=0){
+//                System.out.println("Success");
+//            }
+//        }catch(ClassCastException c){
+//            System.out.println(c.getMessage());
+//        }catch(NumberFormatException num){
+//            System.err.println(num.getMessage());
+//            
+//        }
     }//GEN-LAST:event_createClassActionPerformed
 
     private void endMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endMonthActionPerformed
@@ -502,22 +502,29 @@ public class CreateClass extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> startMonth;
     // End of variables declaration//GEN-END:variables
     private int getDayOfMonth(int indexMonth){
-        int y = Integer.parseInt(academic_year.getText());
-        switch (indexMonth) {
-            case 1:
-                // February
-                if (( y % 400 == 0) || (y % 4 == 0 && y % 100 != 0)) {
-                    return 29; // Leap year
-                } else {
-                    return 28; // Non-leap year
+        try{
+            int y = Integer.parseInt(academic_year.getText());
+            switch (indexMonth) {
+                case 1 -> {
+                    // February
+                    if (( y % 400 == 0) || (y % 4 == 0 && y % 100 != 0)) {
+                        return 29; // Leap year
+                    } else {
+                        return 28; // Non-leap year
+                    }
                 }
-            case 3:
-            case 5:
-            case 8:
-            case 10:
-                return  30; // April, June, September, November
-            default:
-                return 31; // Other months
+                case 3, 5, 8, 10 -> {
+                    return  30; // April, June, September, November
+                }
+                default -> {
+                    return 31; // Other months
+                }
+            }
+        }catch(NumberFormatException d){
+            System.out.println("No");
+                    return 0;
+
         }
+        
     }
 }
