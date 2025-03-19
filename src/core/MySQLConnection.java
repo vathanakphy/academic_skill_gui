@@ -26,6 +26,9 @@ public class MySQLConnection {
             }
             catch (SQLException e) {                
             }
+            
+        }else{
+            
         }
         return connection;
     }
