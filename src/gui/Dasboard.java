@@ -58,17 +58,17 @@ public class Dasboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 51, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(1080, 720));
 
-        jPanel2.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 51, 102));
 
         userType.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         userType.setForeground(new java.awt.Color(255, 255, 255));
         userType.setText("Admin");
 
-        resentPasswd.setBackground(new java.awt.Color(51, 153, 255));
-        resentPasswd.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        resentPasswd.setBackground(new java.awt.Color(0, 51, 102));
+        resentPasswd.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         resentPasswd.setForeground(new java.awt.Color(255, 255, 255));
         resentPasswd.setText("Reset Passord");
         resentPasswd.addActionListener(new java.awt.event.ActionListener() {
@@ -77,8 +77,8 @@ public class Dasboard extends javax.swing.JFrame {
             }
         });
 
-        home.setBackground(new java.awt.Color(51, 153, 255));
-        home.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        home.setBackground(new java.awt.Color(0, 51, 102));
+        home.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         home.setForeground(new java.awt.Color(255, 255, 255));
         home.setText("Home");
         home.addActionListener(new java.awt.event.ActionListener() {
@@ -87,8 +87,8 @@ public class Dasboard extends javax.swing.JFrame {
             }
         });
 
-        createUser.setBackground(new java.awt.Color(51, 153, 255));
-        createUser.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        createUser.setBackground(new java.awt.Color(0, 51, 102));
+        createUser.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         createUser.setForeground(new java.awt.Color(255, 255, 255));
         createUser.setText("Create User");
         createUser.addActionListener(new java.awt.event.ActionListener() {
@@ -97,8 +97,8 @@ public class Dasboard extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(51, 153, 255));
-        jButton4.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        jButton4.setBackground(new java.awt.Color(0, 51, 102));
+        jButton4.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Student Enrollment");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -107,8 +107,8 @@ public class Dasboard extends javax.swing.JFrame {
             }
         });
 
-        createCourse.setBackground(new java.awt.Color(51, 153, 255));
-        createCourse.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        createCourse.setBackground(new java.awt.Color(0, 51, 102));
+        createCourse.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         createCourse.setForeground(new java.awt.Color(255, 255, 255));
         createCourse.setText("Create Course");
         createCourse.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -122,8 +122,8 @@ public class Dasboard extends javax.swing.JFrame {
             }
         });
 
-        createClass1.setBackground(new java.awt.Color(51, 153, 255));
-        createClass1.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        createClass1.setBackground(new java.awt.Color(0, 51, 102));
+        createClass1.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         createClass1.setForeground(new java.awt.Color(255, 255, 255));
         createClass1.setText("Create Class");
         createClass1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -141,23 +141,27 @@ public class Dasboard extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(resentPasswd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(createUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(createClass1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(createCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(createUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resentPasswd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createClass1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(userType)
-                .addGap(94, 94, 94))
+                .addGap(58, 58, 58))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(49, 49, 49)
                 .addComponent(userType)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(createUser, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,13 +173,14 @@ public class Dasboard extends javax.swing.JFrame {
                 .addComponent(createClass1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
-        jLabel3.setBackground(new java.awt.Color(51, 153, 255));
+        jLabel3.setBackground(new java.awt.Color(0, 153, 204));
         jLabel3.setForeground(new java.awt.Color(51, 153, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/heighg 19.png"))); // NOI18N
 
+        MianContent.setBackground(new java.awt.Color(153, 204, 0));
         MianContent.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -188,7 +193,8 @@ public class Dasboard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MianContent)))
+                        .addComponent(MianContent)
+                        .addGap(126, 126, 126)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -199,7 +205,9 @@ public class Dasboard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(MianContent)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(MianContent)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
