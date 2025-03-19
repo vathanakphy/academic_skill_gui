@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import core.Form;
 import core.MySQLConnection;
-import user.Admin;
 import user.Student;
 import user.Teacher;
 import user.User;
@@ -22,6 +21,11 @@ public class CourseInstance {
     public int term;
     public String group;
     public String classRoom;
+    public String startDate;
+    public String startTime;
+    public String endDate;
+    public String endTime;
+
     protected ArrayList<String> listStudent = new ArrayList<>(30);
     protected HashMap<String,String> listStudentName = new HashMap<>(30); // ID and name
     // private ArrayList<Quizz> quizzes = new ArrayList<Quizz>();
@@ -206,6 +210,46 @@ public class CourseInstance {
                 }
             }
         }
+    }
+
+    public static void syncCourseInstance(){
+        //check instanceID is null or not
+        String query = "SELECT * FROM Course_instance AS c;";
+        ResultSet result = MySQLConnection.executeQuery(query);
+        if(result!=null){
+            try{
+                while(result.next()){
+                    int year = result.getInt("year");
+                    int term = result.getInt("term");
+                    String group = result.getString("group_s");
+                    String short_name = result.getString("short_name");
+                    String teacher_id = result.getString("teacher_id");
+                    String startD = result.getString("start_date");
+                    String startT = result.getString("start_time");
+                    String endD = result.getString("end_date");
+                    String endT = result.getString("end_time");
+                    Course.syncCourse(short_name);
+                    try{
+                        Course course = Course.findCourse(short_name);
+                        ArrayList<String> listStu = getStudentList(year,term,group,short_name);
+                        CourseInstance c = new CourseInstance(course, teacher_id, year, term, group,listStu);
+                        c.startDate = startD;
+                        c.endDate = endD;
+                        c.startTime = startT;
+                        c.endTime = endT;
+                    }catch(NullPointerException nu){
+                        System.out.println("Cannot Sync" + nu.getMessage());
+                    }
+                }
+            }catch(SQLException e){
+                System.out.println("Cannot Sync"+e.getMessage());
+            }
+        }
+    }
+    public Object[] toObjectArray() {
+        return new Object[]{
+            this.keyIdentical,User.listUser.get(teacherID).getName(), (startDate + " - "+endDate),(startTime+ " - "+endTime)
+        };
     }
     private static ArrayList<String> getStudentList(int y,int t,String g,String short_name){
         String query = "SELECT student_id FROM Enrollment WHERE course_instance_id = (SELECT course_instance_id FROM Course_instance WHERE year = "+y+" AND term = "+t+" AND group_s = '"+g+"' AND short_name = '"+short_name+"');";
