@@ -45,6 +45,9 @@ public class AdminHome extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 255, 255));
 
+        displayAll.setBackground(new java.awt.Color(0, 51, 102));
+        displayAll.setForeground(new java.awt.Color(255, 255, 255));
+
         allUser.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
         allUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,11 +124,17 @@ public class AdminHome extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(displayAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(displayAll, javax.swing.GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(displayAll, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(displayAll, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
