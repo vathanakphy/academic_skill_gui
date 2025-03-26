@@ -17,15 +17,6 @@ public class Form implements Authentication{
     public int TYPE_OF_USER = 3;
     @Override
     public User login(String email,String passsword) {
-
-        // System.out.print("Email address : ");
-        // String email = input.next();
-        // System.out.print("Password      : ");
-        // String passsword = input.next();
-
-        //TEST LOGIN
-
-        
         User user = null;   
         if (loadData(email,passsword)!=null) {
             if(email.endsWith("@tch.kdc.edu")) {
@@ -37,7 +28,6 @@ public class Form implements Authentication{
             }
             return User.login(user);
         }
-        // System.out.println("Fail");
         return null;
     }
     @SuppressWarnings("unused")
@@ -137,9 +127,9 @@ public class Form implements Authentication{
     public User loadData(String userID){
         String query = " ";
             if(userID.contains("S")){
-                query = "SELECT u.id, u.first_name, u.last_name, u.dob, u.address, u.email, u.phone_number, u.password, s.status FROM User AS u JOIN Students AS s ON u.id = s.user_id WHERE u.id = '"+userID+"';"; //NOT READY 
+                query = "SELECT u.id, u.first_name, u.last_name, u.dob, u.address, u.email, u.phone_number, u.password,s.status,u.gender,u.national_id FROM User AS u JOIN Students AS s ON u.id = s.user_id WHERE s.user_id = '"+userID+"';"; //NOT READY 
             }else if(userID.contains("T")){
-                query = "SELECT u.id, u.first_name, u.last_name, u.dob, u.address, u.email, u.phone_number, u.password, t.role_major,t.status FROM User AS u JOIN Teachers AS t ON u.id = t.user_id WHERE u.id = '"+userID+"';"; //NOT READY 
+                query = "SELECT u.id, u.first_name, u.last_name, u.dob, u.address, u.email, u.phone_number, u.password, t.major,t.status,u.gender,u.national_id FROM User AS u JOIN Teachers AS t ON u.id = t.user_id WHERE t.user_id = '"+userID+"';"; //NOT READY 
             }
             return getUsr(query);
     }
@@ -159,7 +149,6 @@ public class Form implements Authentication{
         if(result!=null){
             try{
                 if (result.next()) { 
-                    System.out.println("Start Program");
                     String userId = result.getString("id"); 
                     String userEmail = result.getString("email");
                     String phone = result.getString("phone_number"); 
@@ -174,18 +163,15 @@ public class Form implements Authentication{
                     if (userEmail.endsWith("@stu.kdc.edu")){
                         boolean status = result.getBoolean("status");
                         Student user = new Student(userId, firstName,lastName,gender,national_id, address, phone, userEmail, userPassword,status,DOB);
-                        System.out.println(user);
                         return user;
                     }else if(userEmail.endsWith("@tch.kdc.edu")){
                         boolean status = result.getBoolean("status");
                         String major = result.getString("major");
                         Teacher user = new Teacher( userId, firstName,lastName,gender,national_id,  address,  phone, userEmail, userPassword, major,status,DOB);
-                                                System.out.println(user);
 
                         return user;
                     }else if(userEmail.endsWith("@adm.kdc.edu")){
                         Admin adm = new Admin(userId,firstName,lastName,address,phone,userEmail,userPassword,DOB);
-                                                System.out.println(adm);
                         return adm;
                     }
                 } else {

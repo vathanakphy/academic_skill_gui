@@ -20,6 +20,7 @@ public class MySQLConnection {
 
     // Establish the connection
     public static Connection getConnection() {
+    connection = null;
         if (connection == null) {
             try {
                 connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -55,7 +56,8 @@ public class MySQLConnection {
             Statement statement = getConnection().createStatement();
             return statement.executeQuery(query);
         } catch (SQLException e) {
-            System.out.println("Query execution failed!");
+             System.out.println("Query execution failed!"+e.getMessage()+e.getSQLState()+e.getErrorCode());
+            e.printStackTrace();
         }
         return null;
     }

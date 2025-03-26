@@ -7,10 +7,10 @@ package gui;
 import java.text.Normalizer;
 import core.*;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import user.Student;
 import user.Teacher;
 import user.User;
-
 /**
  *
  * @author vathanak
@@ -69,6 +69,7 @@ public class UserInformation extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         other = new javax.swing.JTextPane();
+        jButton2 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -170,12 +171,21 @@ public class UserInformation extends javax.swing.JPanel {
         other.setText("adada");
         jScrollPane9.setViewportView(other);
 
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Exit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,12 +197,16 @@ public class UserInformation extends javax.swing.JPanel {
                             .addComponent(jLabel7))
                         .addGap(82, 82, 82)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2)
+                                .addGap(17, 17, 17))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(223, 223, 223)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,7 +234,9 @@ public class UserInformation extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton2))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,23 +292,34 @@ public class UserInformation extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Form form = new Form();
-        User user = form.loadData(userID.getText());
+        User user = User.listUser.get(userID.getText());
         if(user instanceof Teacher){
             Teacher tch = (Teacher)user;
             tch.resetPassword();
             tch.updateData();
-            System.out.println(tch.checkPassword("kdc2025"));
-            JOptionPane.showMessageDialog(null, "Password reset to defult : kdc2025!", "Success",JOptionPane.INFORMATION_MESSAGE);
-            this.removeAll();
-        }else if(user instanceof Student){
+            if(tch.checkPassword("kdc2025")){
+                JOptionPane.showMessageDialog(null, "Password reset to default: kdc2025!", "Success", JOptionPane.INFORMATION_MESSAGE);            }
+             
+        } else if(user instanceof Student){
             Student stu = (Student)user;
             stu.resetPassword();
             stu.updateData();
-            System.out.println(stu.checkPassword("kdc2025"));
-            JOptionPane.showMessageDialog(null, "Password reset to defult : kdc2025!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            this.removeAll();
+            if(stu.checkPassword("kdc2025")){
+                JOptionPane.showMessageDialog(null, "Password reset to default: kdc2025!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        ResetUI reset = new ResetUI();
+        add(reset);
+        reset.setVisible(true);
+        revalidate();
+        repaint();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -301,6 +328,7 @@ public class UserInformation extends javax.swing.JPanel {
     private javax.swing.JTextPane email;
     private javax.swing.JTextPane gender;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

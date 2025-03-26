@@ -318,8 +318,8 @@ public class Dasboard extends javax.swing.JFrame {
 //        </editor-fold>
             if (args != null && args.length == 2) {
                 String email = args[0];   // Email passed as the first argument
-                String password = args[1]; // Password passed as the second argument
-                admin = (Admin) form.loadData(email, password);
+                String id = args[1]; // Password passed as the second argument
+                admin = (Admin) form.loadData(id);
             } else {
                 JOptionPane.showMessageDialog(null, "Please Login before lunch this page!", "Error", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);                

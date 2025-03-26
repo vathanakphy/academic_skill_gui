@@ -217,4 +217,15 @@ public class Student  extends User{
             this.getEmail(), this.getPhoneNumber(), gender,nationalID,"Student"
         };
     }
+    public Object[] toObjectArrayFourData() {
+        return new Object[]{
+            this.getId(),(this.firstName + " " + this.lastName),
+            gender,this.getPhoneNumber()
+        };
+    }
+    public Object[] toObjectArrayTwoData() {
+        return new Object[]{
+            this.getId(),(this.firstName + " " + this.lastName)
+        };
+    }
 }

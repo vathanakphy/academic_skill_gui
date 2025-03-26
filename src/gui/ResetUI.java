@@ -104,8 +104,10 @@ public class ResetUI extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Form form = new Form();
-        User user = form.loadData(searchUserID.getText());
+        String userID = searchUserID.getText();
+        System.out.println("User ID : "+userID);
+        User user = User.listUser.get(userID);
+        System.out.println(user);
         if(user!=null){
             //redirect to new pages
             if(user instanceof Student){
@@ -115,9 +117,11 @@ public class ResetUI extends javax.swing.JPanel {
                 userInfor.setVisible(true);
             }
         }else{
-             searchUserID.setText("");
             JOptionPane.showMessageDialog(null, "Cannot Find User by ID!", "Not Found", JOptionPane.INFORMATION_MESSAGE);
+            searchUserID.setText("");
         }
+        jLayeredPane1.revalidate();
+        jLayeredPane1.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void searchUserIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserIDActionPerformed

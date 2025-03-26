@@ -18,7 +18,13 @@ public class AdminHome extends javax.swing.JPanel {
      */
     public AdminHome() {
         initComponents();
+        Student.loadAllStudent();
+        Teacher.loadAllTeacher();
+        Course.listCourses.clear();
+        Course.syncCourse();
+        CourseInstance.syncCourseInstance();
         addRowsToTables();
+        
     }
 
     /**
@@ -140,13 +146,7 @@ public class AdminHome extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane5;
     // End of variables declaration//GEN-END:variables
-    private void addRowsToTables() {
-        Student.loadAllStudent();
-        Teacher.loadAllTeacher();
-        Course.listCourses.clear();
-        Course.syncCourse();
-        CourseInstance.syncCourseInstance();
-        System.out.println(Course.listCourses.size());
+    public void addRowsToTables() {
         // Get Table Models
         DefaultTableModel teacherModel = (DefaultTableModel) AllTeacher.getModel();
         DefaultTableModel studentModel = (DefaultTableModel) allStu.getModel();
