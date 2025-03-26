@@ -13,8 +13,8 @@ public class Admin extends User {
         id +=(String.valueOf(++numberOfAdmin));
         User.listUser.put(this.id, this);
     }
-    public Admin(String id,String firstName, String lastName, String address, String phoneNumber,String email,String password) {
-        super(firstName, lastName,"NA","NA", address, phoneNumber, email, password);
+    public Admin(String id,String firstName, String lastName, String address, String phoneNumber,String email,String password,String dob) {
+        super(firstName, lastName,"NA","NA", address, phoneNumber, email, password,dob);
         this.id = id;
         User.listUser.put(this.id, this);
     }

@@ -184,7 +184,7 @@ public class Form implements Authentication{
 
                         return user;
                     }else if(userEmail.endsWith("@adm.kdc.edu")){
-                        Admin adm = new Admin(userId,firstName,lastName,address,phone,userEmail,userPassword);
+                        Admin adm = new Admin(userId,firstName,lastName,address,phone,userEmail,userPassword,DOB);
                                                 System.out.println(adm);
                         return adm;
                     }
