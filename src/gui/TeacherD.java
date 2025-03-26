@@ -29,7 +29,6 @@ public class TeacherD extends javax.swing.JFrame {
         for(String tchC:teaching_course){
            courseTeach.addItem(tchC);
         }
-        
     }
 
     /**

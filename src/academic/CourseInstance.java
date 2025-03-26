@@ -43,7 +43,7 @@ public class CourseInstance {
     private HashMap<String, ArrayList<Grading>> activityScore = new HashMap<String, ArrayList<Grading>>();
 
     public CourseInstance(Course course, String teacherID, int year, int term, String group,
-            ArrayList<String> listStudent) {
+        ArrayList<String> listStudent) {
         this.teacherID = teacherID;
         this.course = course;
         this.year = year;
@@ -142,13 +142,9 @@ public class CourseInstance {
         return keyIdentical;
     }
 
-    public void setStuGrade(User user, String stuID, String assessmentType, int ses_number, float socre) {
-        if (user instanceof Teacher) {
+    public void setStuGrade(String stuID, String assessmentType, int ses_number, float socre) {
             Grading grade = new Grading(assessmentType, ses_number, socre);
             activityScore.get(stuID).add(grade);
-        } else {
-            System.out.println("Access Denied : teacherID Only");
-        }
     }
 
     private void gradeHeader() {
@@ -270,7 +266,6 @@ public class CourseInstance {
     }
 
     private static ArrayList<String> getStudentList(int y, int t, String g, String short_name) {
-        System.out.println("This is student");
         String query = "SELECT student_id FROM Enrollment WHERE course_instance_id = (SELECT course_instance_id FROM Course_instance WHERE year = "
                 + y + " AND term = " + t + " AND group_s = '" + g + "' AND short_name = '" + short_name + "');";
         ArrayList<String> list = new ArrayList<>();

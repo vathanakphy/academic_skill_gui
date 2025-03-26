@@ -5,7 +5,9 @@
 package gui;
 
 import java.util.HashMap;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import user.Student;
 import user.User;
 
@@ -19,8 +21,10 @@ public class StudentGrading extends javax.swing.JPanel {
      * Creates new form StudentGrading
      * @param listStu
      */
-    public StudentGrading(HashMap<String,User> listStu) {
+    String course_instacne_id;
+    public StudentGrading(HashMap<String,User> listStu,String c_id) {
         initComponents();
+        course_instacne_id = c_id;
         DefaultTableModel stuGradeModel = (DefaultTableModel) stuGrade.getModel();
         for(User s:listStu.values()){
             if(s instanceof Student){
@@ -41,7 +45,7 @@ public class StudentGrading extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         stuGrade = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         stuGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,35 +65,86 @@ public class StudentGrading extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(stuGrade);
 
-        jLabel1.setText("Hi");
+        jButton2.setText("Submit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jLabel1)
+                .addGap(342, 342, 342)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+       DefaultTableModel stuGradeModel = (DefaultTableModel) stuGrade.getModel();
+    
+    // Debug: Print entire table data
+    System.out.println("Table Data:");
+    for (int i = 0; i < stuGradeModel.getRowCount(); i++) {
+        for (int j = 0; j < stuGradeModel.getColumnCount(); j++) {
+            System.out.print(stuGradeModel.getValueAt(i, j) + "\t");
+        }
+        System.out.println();
+    }
+
+    // Find the column index for "Score"
+    int scoreColumnIndex = stuGradeModel.findColumn("Score"); 
+
+    if (scoreColumnIndex == -1) {
+        System.out.println("Column 'Score' not found!");
+        return;
+    }
+
+    // Retrieve and print all values from "Score" column
+    System.out.println("Scores:");
+    for (int i = 0; i < stuGradeModel.getRowCount(); i++) {
+            Object score = stuGradeModel.getValueAt(i, scoreColumnIndex);
+            float scoreValue = 0.0f;
+            if (score instanceof Number) {
+                scoreValue = ((Number) score).floatValue();
+            } else {
+                try {
+                    scoreValue = Float.parseFloat(score.toString());
+                } catch (NumberFormatException e) {
+                    System.out.println("Error: Invalid score format");
+                }
+            }
+            String cl_id = course_instacne_id;
+            String[] parts = cl_id.split("-");
+
+            String year = parts[0];        
+            String term = parts[1];        
+            String group = parts[2].substring(1);
+            String shortName = parts[3]; 
+            String qu = "INSERT INTO Grade (instance_id ,stu_id,score,session_no) VALUES((SELECT course_instance_id FROM Course_instance WHERE year = "+year+" AND term = "+term+" AND group_s = '"+group+"' AND short_name = '"+shortName+"'),'S1',"+scoreValue+",1);";
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable stuGrade;
     // End of variables declaration//GEN-END:variables

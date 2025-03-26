@@ -29,7 +29,7 @@ public class CourseTeacher extends javax.swing.JFrame {
         }
         listStident = new ListStu(User.listUser);
         System.out.println(listStident);
-        stuGrade = new StudentGrading(User.listUser);
+        stuGrade = new StudentGrading(User.listUser,class_teach.getKeyIdentical());
         MainCon.add(listStident);
         MainCon.add(stuGrade);
         listStident.setVisible(true);
@@ -97,7 +97,7 @@ public class CourseTeacher extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         MainCon.setBackground(new java.awt.Color(51, 255, 255));
@@ -110,14 +110,14 @@ public class CourseTeacher extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MainCon)
+                .addComponent(MainCon, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(638, Short.MAX_VALUE)
                 .addComponent(MainCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
