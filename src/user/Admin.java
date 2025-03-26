@@ -9,7 +9,7 @@ public class Admin extends User {
     public String id = "A";
 
     public Admin(String firstName, String lastName, String address, String phoneNumber) {
-        super(firstName, lastName,"NA","NA", address, phoneNumber, EMAIL_FORMAT);
+        super(firstName, lastName,"NA","NA", address, phoneNumber, EMAIL_FORMAT,"2025-03-19");
         id +=(String.valueOf(++numberOfAdmin));
         User.listUser.put(this.id, this);
     }

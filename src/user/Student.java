@@ -23,8 +23,8 @@ public class Student  extends User{
         super(email, password);
     }
 
-    public Student(String id,String firstName, String lastName, String gender,String nationalID, String address, String phoneNumber,String email,String password,boolean status) {
-        super(firstName,lastName,gender,nationalID, address, phoneNumber,email,password);
+    public Student(String id,String firstName, String lastName, String gender,String nationalID, String address, String phoneNumber,String email,String password,boolean status,String dob) {
+        super(firstName,lastName,gender,nationalID, address, phoneNumber,email,password,dob);
         this.id = id;
         if(MySQLConnection.testConnection()){
             syncCourse();
@@ -34,8 +34,8 @@ public class Student  extends User{
     }
     
     //register
-    public Student(String firstName,String lastName,String gender,String nationalID, String address, String phoneNumber) {
-        super(firstName,lastName,gender,nationalID, address, phoneNumber,EMAIL_FORMAT);
+    public Student(String firstName,String lastName,String gender, String address, String phoneNumber,String DOB) {
+        super(firstName,lastName,gender,"None", address, phoneNumber,EMAIL_FORMAT,DOB);
         super.id="S";
         super.id +=(String.valueOf(++numberOfStudents));
         status = true;
@@ -156,7 +156,7 @@ public class Student  extends User{
     public int registerToMySQL() throws SQLException {        
         int row = super.registerToMySQL();
         String query = "INSERT INTO Students (user_id,status) "
-        + "VALUES ('" + id + "','"+status+"');";    
+        + "VALUES ('" + id + "','"+1+"');";    
         // + "VALUES ('" + id + "', '" + major + "');";    
         row += MySQLConnection.executeUpdate(query);
         MySQLConnection.closeConnection();
@@ -198,9 +198,11 @@ public class Student  extends User{
                     String gender  = result.getString("gender");
                     String national_id = result.getString("national_id");
                     String address = result.getString("address");
+                    String dob = result.getString("dob");
                     boolean status = result.getBoolean("status");
+                    
                     @SuppressWarnings("unused")
-                    Student user = new Student(userId, firstName,lastName,gender,national_id, address, phone, userEmail, userPassword,status);
+                    Student user = new Student(userId, firstName,lastName,gender,national_id, address, phone, userEmail, userPassword,status,dob);
                 }   
             }catch(SQLException s){
                 

@@ -7,10 +7,12 @@ import java.util.Scanner;
 
 import core.MySQLConnection;
 import exception.CastToUserHandleException;
+import java.time.format.DateTimeFormatter;
 
 public abstract class User {
     static Scanner input = new Scanner(System.in);
     static int numberOfUser = 0;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
     public String lastName;
     public String firstName;
     protected LocalDate dob;
@@ -22,17 +24,17 @@ public abstract class User {
     private String password;
     protected String id;
 
-    public static HashMap<String, User> listUser = new HashMap<String, User>();
+    public static HashMap<String, User> listUser = new HashMap<String,User>();
 
     // login
-    public User(String firstName, String lastName,String gender,String nationalID,String address, String phoneNumber, String email, String password) {
+    public User(String firstName, String lastName,String gender,String nationalID,String address, String phoneNumber, String email, String password,String dob) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.gender = gender;
         this.nationalID = nationalID;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.dob = LocalDate.now(); // need to input later
+        this.dob = LocalDate.parse(dob, formatter);
         this.email = email;
         this.password = password;
     }
@@ -43,7 +45,7 @@ public abstract class User {
     }
 
     // register
-    public User(String firstName, String lastName,String gender,String nationalID, String address, String phoneNumber, String emailFormat) {
+    public User(String firstName, String lastName,String gender,String nationalID, String address,String phoneNumber, String emailFormat,String dob) {
         ++numberOfUser;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -51,7 +53,8 @@ public abstract class User {
         this.nationalID = nationalID;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.dob = LocalDate.now(); // need to input later
+        // Parse the input string into a LocalDate
+        this.dob = LocalDate.parse(dob, formatter);
         this.email = generateEmail(emailFormat).toLowerCase();
         this.password = "kdc2025"; // defult password
     }
@@ -155,9 +158,12 @@ public abstract class User {
         return firstName + "." + lastName + numberOfUser + format;
     }
     public int registerToMySQL() throws SQLException {
-        String userQuery = "INSERT INTO User (id, first_name, last_name, dob, address, email, phone_number, password) "
-                + "VALUES ('" + id + "', '" + firstName + "', '" + lastName + "', '" + dob.toString() + "', '"
-                + address + "', '" + email + "', '" + phoneNumber + "', '" + password + "');";
+        String userQuery = "INSERT INTO User (id, first_name, last_name, dob, address, email, phone_number, password, gender, national_id) "
+                + "VALUES ('" + id + "', '" + firstName + "', '" + lastName + "', '" 
+                + dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "', '"
+                + address + "', '" + email + "', '" + phoneNumber + "', '" 
+                + password + "', '" + gender + "', '" + nationalID + "');";
+
         int row = MySQLConnection.executeUpdate(userQuery);
         MySQLConnection.closeConnection();
         return row;

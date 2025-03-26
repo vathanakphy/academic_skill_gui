@@ -4,6 +4,11 @@
  */
 package gui;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import user.*;
+
 /**
  *
  * @author vathanak
@@ -13,8 +18,17 @@ public class CreateUser extends javax.swing.JPanel {
     /**
      * Creates new form CreateUser
      */
+    String[] months = {
+            "JAN", "FEB", "MAR", "APR", "MAY", "JUN", 
+            "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+        };
     public CreateUser() {
         initComponents();
+        
+        for (String month : months) {
+            startMonth.addItem(month);
+            month_stu.addItem(month);
+        }
     }
 
     /**
@@ -30,18 +44,20 @@ public class CreateUser extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        major7 = new javax.swing.JTextField();
-        major8 = new javax.swing.JTextField();
-        major9 = new javax.swing.JTextField();
-        major10 = new javax.swing.JTextField();
-        major11 = new javax.swing.JTextField();
+        stu_fname = new javax.swing.JTextField();
+        stu_phone = new javax.swing.JTextField();
+        stu_address = new javax.swing.JTextField();
+        stu_lname = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         genderSelection1 = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        year_stu = new javax.swing.JTextField();
+        month_stu = new javax.swing.JComboBox<>();
+        day_stu = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,13 +67,17 @@ public class CreateUser extends javax.swing.JPanel {
         major = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        major1 = new javax.swing.JTextField();
-        major2 = new javax.swing.JTextField();
-        major3 = new javax.swing.JTextField();
-        major4 = new javax.swing.JTextField();
-        major5 = new javax.swing.JTextField();
+        fname = new javax.swing.JTextField();
+        phone5 = new javax.swing.JTextField();
+        address = new javax.swing.JTextField();
+        lname = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         genderSelection = new javax.swing.JComboBox<>();
+        nationalId = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        startMonth = new javax.swing.JComboBox<>();
+        startDay1 = new javax.swing.JComboBox<>();
+        academic_year = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 255, 255));
 
@@ -77,38 +97,31 @@ public class CreateUser extends javax.swing.JPanel {
             }
         });
 
-        major7.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major7.addActionListener(new java.awt.event.ActionListener() {
+        stu_fname.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        stu_fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major7ActionPerformed(evt);
+                stu_fnameActionPerformed(evt);
             }
         });
 
-        major8.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major8.addActionListener(new java.awt.event.ActionListener() {
+        stu_phone.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        stu_phone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major8ActionPerformed(evt);
+                stu_phoneActionPerformed(evt);
             }
         });
 
-        major9.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major9.addActionListener(new java.awt.event.ActionListener() {
+        stu_address.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        stu_address.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major9ActionPerformed(evt);
+                stu_addressActionPerformed(evt);
             }
         });
 
-        major10.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major10.addActionListener(new java.awt.event.ActionListener() {
+        stu_lname.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        stu_lname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major10ActionPerformed(evt);
-            }
-        });
-
-        major11.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major11ActionPerformed(evt);
+                stu_lnameActionPerformed(evt);
             }
         });
 
@@ -128,10 +141,6 @@ public class CreateUser extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(0, 51, 153));
         jLabel13.setText("Gender");
 
-        jLabel14.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 51, 153));
-        jLabel14.setText("DOB");
-
         genderSelection1.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
         genderSelection1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "male", "female" }));
         genderSelection1.addActionListener(new java.awt.event.ActionListener() {
@@ -144,39 +153,71 @@ public class CreateUser extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(0, 51, 153));
         jLabel15.setText("Phone");
 
+        year_stu.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        year_stu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                year_stuActionPerformed(evt);
+            }
+        });
+
+        month_stu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                month_stuActionPerformed(evt);
+            }
+        });
+
+        day_stu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                day_stuActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel16.setText("DOB (Y-M-D)");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(119, 119, 119)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(major9, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(215, 345, Short.MAX_VALUE)
+                        .addComponent(year_stu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(month_stu, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(day_stu, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel11)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel14)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel13)
-                                .addComponent(jLabel15)
-                                .addComponent(jLabel10)))
+                        .addGap(119, 119, 119)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel11)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel12)
+                                        .addComponent(jLabel13)
+                                        .addComponent(jLabel10)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(major7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(major11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(major8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(major10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(stu_fname, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                                    .addComponent(stu_lname, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                                    .addComponent(stu_address, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                                    .addComponent(genderSelection1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(genderSelection1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(stu_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel16)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addGap(162, 162, 162))
         );
         jPanel2Layout.setVerticalGroup(
@@ -184,31 +225,33 @@ public class CreateUser extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stu_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stu_lname, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stu_address, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genderSelection1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                     .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(year_stu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(month_stu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(day_stu, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stu_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addGap(45, 45, 45)
+                .addGap(27, 27, 27)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addGap(191, 191, 191))
         );
 
         jTabbedPane1.addTab("Student", jPanel2);
@@ -229,7 +272,7 @@ public class CreateUser extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 153));
-        jLabel5.setText("DOB");
+        jLabel5.setText("DOB (Y-M-D)");
 
         jLabel6.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 51, 153));
@@ -256,38 +299,31 @@ public class CreateUser extends javax.swing.JPanel {
             }
         });
 
-        major1.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major1.addActionListener(new java.awt.event.ActionListener() {
+        fname.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major1ActionPerformed(evt);
+                fnameActionPerformed(evt);
             }
         });
 
-        major2.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major2.addActionListener(new java.awt.event.ActionListener() {
+        phone5.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        phone5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major2ActionPerformed(evt);
+                phone5ActionPerformed(evt);
             }
         });
 
-        major3.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major3.addActionListener(new java.awt.event.ActionListener() {
+        address.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        address.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major3ActionPerformed(evt);
+                addressActionPerformed(evt);
             }
         });
 
-        major4.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major4.addActionListener(new java.awt.event.ActionListener() {
+        lname.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        lname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major4ActionPerformed(evt);
-            }
-        });
-
-        major5.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
-        major5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                major5ActionPerformed(evt);
+                lnameActionPerformed(evt);
             }
         });
 
@@ -302,6 +338,36 @@ public class CreateUser extends javax.swing.JPanel {
             }
         });
 
+        nationalId.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        nationalId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nationalIdActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel9.setText("National ID");
+
+        startMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startMonthActionPerformed(evt);
+            }
+        });
+
+        startDay1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startDay1ActionPerformed(evt);
+            }
+        });
+
+        academic_year.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        academic_year.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                academic_yearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -309,69 +375,90 @@ public class CreateUser extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)))
-                        .addGap(63, 63, 63)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(major3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(major1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(major5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(major4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(genderSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(major, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(major2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nationalId, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(major, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(phone5, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lname, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(academic_year, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(startMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(startDay1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel8))
+                                .addGap(106, 106, 106)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(genderSelection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGap(166, 166, 166))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lname, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genderSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(academic_year, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startDay1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(major2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel6)
+                    .addComponent(phone5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(major, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nationalId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Teacher", jPanel1);
@@ -384,16 +471,18 @@ public class CreateUser extends javax.swing.JPanel {
                 .addGap(353, 353, 353)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -401,28 +490,50 @@ public class CreateUser extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_majorActionPerformed
 
-    private void major1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major1ActionPerformed
+    private void fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_major1ActionPerformed
+    }//GEN-LAST:event_fnameActionPerformed
 
-    private void major2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major2ActionPerformed
+    private void phone5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phone5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_major2ActionPerformed
+    }//GEN-LAST:event_phone5ActionPerformed
 
-    private void major3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major3ActionPerformed
+    private void addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_major3ActionPerformed
+    }//GEN-LAST:event_addressActionPerformed
 
-    private void major4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major4ActionPerformed
+    private void lnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_major4ActionPerformed
-
-    private void major5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_major5ActionPerformed
+    }//GEN-LAST:event_lnameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String fname = this.fname.getText();
+        String lname = this.lname.getText();
+        String address = this.address.getText();
+        String syear = academic_year.getText();
+        String smonth = (String) startMonth.getSelectedItem();
+        String sgender = (String) genderSelection.getSelectedItem();
+        String sphone = phone5.getText();
+        String snationalId = nationalId.getText();
+        String smajor = major.getText();
+        String sday = (String) startDay1.getSelectedItem();
+        String smonthNo = getMonthNumber(smonth);
+        try {
+            Teacher.syncNumberOfUser();
+            System.out.println(sgender);
+            Teacher tch = new Teacher(fname, lname, sgender,snationalId,address,sphone,smajor,(syear+"-"+smonthNo+"-"+sday));
+            tch.registerToMySQL();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.fname.setText("");
+        this.lname.setText("");
+        this.address.setText("");
+        academic_year.setText("");
+        phone5.setText("");
+        nationalId.setText("");
+        major.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void genderSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderSelectionActionPerformed
@@ -431,34 +542,104 @@ public class CreateUser extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        String fname = stu_fname.getText();
+        String lname = stu_lname.getText();
+        String address = stu_address.getText();
+        String syear = year_stu.getText();
+        String smonth = (String) month_stu.getSelectedItem();
+        String sgender = (String) genderSelection1.getSelectedItem();
+        String sphone = stu_phone.getText();
+        String sday = (String) day_stu.getSelectedItem();
+        String smonthNo = getMonthNumber(smonth);
+        stu_fname.setText("");
+        stu_lname.setText("");
+        stu_address.setText("");
+        year_stu.setText("");
+        stu_phone.setText("");
+        try {
+            Student.syncNumberOfUser();
+             Student stu = new Student(fname, lname, sgender,address,sphone,(syear+"-"+smonthNo+"-"+sday));
+            stu.registerToMySQL();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void major7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major7ActionPerformed
+    private void stu_fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stu_fnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_major7ActionPerformed
+    }//GEN-LAST:event_stu_fnameActionPerformed
 
-    private void major8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major8ActionPerformed
+    private void stu_phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stu_phoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_major8ActionPerformed
+    }//GEN-LAST:event_stu_phoneActionPerformed
 
-    private void major9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major9ActionPerformed
+    private void stu_addressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stu_addressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_major9ActionPerformed
+    }//GEN-LAST:event_stu_addressActionPerformed
 
-    private void major10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major10ActionPerformed
+    private void stu_lnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stu_lnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_major10ActionPerformed
-
-    private void major11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_major11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_major11ActionPerformed
+    }//GEN-LAST:event_stu_lnameActionPerformed
 
     private void genderSelection1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderSelection1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_genderSelection1ActionPerformed
 
+    private void nationalIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nationalIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nationalIdActionPerformed
+
+    private void startMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startMonthActionPerformed
+        // TODO add your handling code here:
+        int monthIndex = startMonth.getSelectedIndex();
+        // Determine number of days in the selected month
+        int daysInMonth = getDayOfMonth(monthIndex,academic_year.getText());
+        System.out.println(academic_year.getSelectedText());
+        // Update the day JComboBox
+        startDay1.removeAllItems();
+        for (int i = 1; i <= daysInMonth; i++) {
+            startDay1.addItem(String.valueOf(i));
+        }
+    }//GEN-LAST:event_startMonthActionPerformed
+
+    private void academic_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_academic_yearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_academic_yearActionPerformed
+
+    private void startDay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startDay1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startDay1ActionPerformed
+
+    private void year_stuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year_stuActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_year_stuActionPerformed
+
+    private void month_stuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month_stuActionPerformed
+        // TODO add your handling code here:
+        int monthIndex = month_stu.getSelectedIndex();
+        // Determine number of days in the selected month
+        int daysInMonth = getDayOfMonth(monthIndex,year_stu.getText());
+        System.out.println(daysInMonth);
+        // Update the day JComboBox
+        day_stu.removeAllItems();
+        for (int i = 1; i <= daysInMonth; i++) {
+            day_stu.addItem(String.valueOf(i));
+        }
+    }//GEN-LAST:event_month_stuActionPerformed
+
+    private void day_stuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_day_stuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_day_stuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField academic_year;
+    private javax.swing.JTextField address;
+    private javax.swing.JComboBox<String> day_stu;
+    private javax.swing.JTextField fname;
     private javax.swing.JComboBox<String> genderSelection;
     private javax.swing.JComboBox<String> genderSelection1;
     private javax.swing.JButton jButton1;
@@ -468,8 +649,8 @@ public class CreateUser extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -477,19 +658,55 @@ public class CreateUser extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField lname;
     private javax.swing.JTextField major;
-    private javax.swing.JTextField major1;
-    private javax.swing.JTextField major10;
-    private javax.swing.JTextField major11;
-    private javax.swing.JTextField major2;
-    private javax.swing.JTextField major3;
-    private javax.swing.JTextField major4;
-    private javax.swing.JTextField major5;
-    private javax.swing.JTextField major7;
-    private javax.swing.JTextField major8;
-    private javax.swing.JTextField major9;
+    private javax.swing.JComboBox<String> month_stu;
+    private javax.swing.JTextField nationalId;
+    private javax.swing.JTextField phone5;
+    private javax.swing.JComboBox<String> startDay1;
+    private javax.swing.JComboBox<String> startMonth;
+    private javax.swing.JTextField stu_address;
+    private javax.swing.JTextField stu_fname;
+    private javax.swing.JTextField stu_lname;
+    private javax.swing.JTextField stu_phone;
+    private javax.swing.JTextField year_stu;
     // End of variables declaration//GEN-END:variables
+    
+    private int getDayOfMonth(int indexMonth,String year){
+        try{
+            int y = Integer.parseInt(year);
+            switch (indexMonth) {
+                case 1 -> {
+                    // February
+                    if (( y % 400 == 0) || (y % 4 == 0 && y % 100 != 0)) {
+                        return 29; // Leap year
+                    } else {
+                        return 28; // Non-leap year
+                    }
+                }
+                case 3, 5, 8, 10 -> {
+                    return  30; // April, June, September, November
+                }
+                default -> {
+                    return 31; // Other months
+                }
+            }
+        }catch(NumberFormatException d){
+            System.out.println("No");
+                    return 0;
+        }  
+    }                        
+    private String getMonthNumber(String m){
+        for(int i=0;i<months.length;i++){
+            if(m.equals(months[i])){
+                return String.valueOf(i+1);
+            }
+        }
+        return "0";
+            
+    }
 }

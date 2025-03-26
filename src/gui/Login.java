@@ -4,6 +4,7 @@
  */
 package gui;
 import core.*;
+import javax.swing.JOptionPane;
 import user.*;
 /**
  *
@@ -180,10 +181,19 @@ public class Login extends javax.swing.JFrame {
         User user = form.login(email,password);
         if(user instanceof Admin){
             setVisible(false);
-            String[] argsForDashboard = {email, password};
-
+            String[] argsForDashboard = {email,user.getId()};
             // Call the main method of Dashboard with the arguments
             Dasboard.main(argsForDashboard);
+        }else if (user instanceof Student){
+            setVisible(false);
+            StudentD.main(new String[]{email,user.getId()});
+        }else if(user instanceof Teacher){
+            setVisible(false);
+            TeacherD.main(new String[]{email,user.getId()});
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "No User found", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

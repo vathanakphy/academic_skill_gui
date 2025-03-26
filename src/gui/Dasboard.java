@@ -5,6 +5,8 @@
 package gui;
 
 import core.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import user.*;
 //import javax.swing.*;
 
@@ -319,7 +321,9 @@ public class Dasboard extends javax.swing.JFrame {
                 String password = args[1]; // Password passed as the second argument
                 admin = (Admin) form.loadData(email, password);
             } else {
-                System.out.println("Invalid arguments. Please pass email and password.");
+                JOptionPane.showMessageDialog(null, "Please Login before lunch this page!", "Error", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);                
+                Login.main(null);
             } 
         }catch(NullPointerException e){
             System.out.println("Fail");

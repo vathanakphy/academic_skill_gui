@@ -22,6 +22,10 @@ public class CreateClass extends javax.swing.JPanel {
     /**
      * Creates new form CreateClass
      */
+    String[] months = {
+            "JAN", "FEB", "MAR", "APR", "MAY", "JUN", 
+            "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+        };
     public CreateClass() {
         initComponents();
         for(Course c :Course.listCourses.values()){
@@ -46,10 +50,7 @@ public class CreateClass extends javax.swing.JPanel {
             startMin.addItem(minute);
             endMin.addItem(minute);
         }
-        String[] months = {
-            "JAN", "FEB", "MAR", "APR", "MAY", "JUN", 
-            "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
-        };
+        
         for (String month : months) {
             startMonth.addItem(month);
             endMonth.addItem(month);
@@ -198,6 +199,12 @@ public class CreateClass extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 51, 153));
         jLabel7.setText(":");
+
+        startDay1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startDay1ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 153));
@@ -389,34 +396,47 @@ public class CreateClass extends javax.swing.JPanel {
     }//GEN-LAST:event_academic_yearActionPerformed
 
     private void createClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createClassActionPerformed
-        // TODO add your handling code here:
-//        String yearText = this.academic_year.getText();
-//        String termText = this.academic_term.getText();
-//        String group = this.academic_group.getText();
-//        String tchBasicInfor = (String) this.selectTeacher.getSelectedItem();
-//        String tchId = tchBasicInfor.split(" ")[0]; 
-//        String courseSortName = (String) this.selectCourse.getSelectedItem();
-//        int y = 0;
-//        int t = 0;
-//        User u = User.listUser.get(tchId);
-//        Teacher tch = null;
-//        try{
-//            tch = (Teacher) u;
-//            Course curs = Course.findCourseByName(courseSortName);
-//            t = Integer.parseInt(termText);
-//            y = Integer.parseInt(yearText);
-//            CourseInstance newclass = new CourseInstance(curs, tch, y, t, group);
-//            String query = "INSERT INTO Course_instance (year, term, group_s, teacher_id, short_name) VALUES ("+y+", "+t+", '"+group+"', '"+tchId+"', '"+curs.getShortName()+"');";
-//            int row = MySQLConnection.executeUpdate(query);
-//            if(row!=0){
-//                System.out.println("Success");
-//            }
-//        }catch(ClassCastException c){
-//            System.out.println(c.getMessage());
-//        }catch(NumberFormatException num){
-//            System.err.println(num.getMessage());
-//            
-//        }
+//         TODO add your handling code here:
+        String yearText = this.academic_year.getText();
+        String termText = this.academic_term.getText();
+        String group = this.academic_group.getText();
+        String tchBasicInfor = (String) this.selectTeacher.getSelectedItem();
+        String tchId = tchBasicInfor.split(" ")[0]; 
+        String courseSortName = (String) this.selectCourse.getSelectedItem();
+        
+        String smonth = getMonthNumber((String) startMonth.getSelectedItem());
+        String emonth = getMonthNumber((String) endMonth.getSelectedItem());
+        String sday = (String) startDay1.getSelectedItem();
+        String eday = (String) endDay.getSelectedItem();
+        String sth = ((String) startHour.getSelectedItem());
+        String stm = ((String) startMin.getSelectedItem());
+        String eth = (String) endHour.getSelectedItem();
+        String emin = (String) endMin.getSelectedItem();
+        String fullSD = yearText+"-"+smonth+"-"+sday;
+        String fullED = yearText+"-"+emonth+"-"+eday;
+        String startTimefull = sth+":"+stm+":"+"00";
+        String endTimefull = eth+":"+emin+":"+"00";
+        int y = 0;
+        int t = 0;
+        User u = User.listUser.get(tchId);
+        Teacher tch = null;
+        try{
+            tch = (Teacher) u;
+            Course curs = Course.findCourseByName(courseSortName);
+            t = Integer.parseInt(termText);
+            y = Integer.parseInt(yearText);
+            CourseInstance newclass = new CourseInstance(curs, tch, y, t, group);
+            String query = "INSERT INTO Course_instance (year, term, group_s, teacher_id, short_name,start_date,end_date,start_time,end_time) VALUES ("+y+", "+t+", '"+group+"', '"+tchId+"', '"+curs.getShortName()+"','"+fullSD+"','"+fullED+"','"+startTimefull+"','"+endTimefull+"');";
+            int row = MySQLConnection.executeUpdate(query);
+            if(row!=0){
+                System.out.println("Success");
+            }
+        }catch(ClassCastException c){
+            System.out.println(c.getMessage());
+        }catch(NumberFormatException num){
+            System.err.println(num.getMessage());
+            
+        }
     }//GEN-LAST:event_createClassActionPerformed
 
     private void endMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endMonthActionPerformed
@@ -450,6 +470,10 @@ public class CreateClass extends javax.swing.JPanel {
     private void startHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startHourActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_startHourActionPerformed
+
+    private void startDay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startDay1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startDay1ActionPerformed
     
     private ArrayList<String> getAllClassRoom(){
        ResultSet r =  MySQLConnection.executeQuery("SELECT class_id FROM Class_room ;");
@@ -526,5 +550,14 @@ public class CreateClass extends javax.swing.JPanel {
 
         }
         
+    }
+    private String getMonthNumber(String m){
+        for(int i=0;i<months.length;i++){
+            if(m.equals(months[i])){
+                return String.valueOf(i+1);
+            }
+        }
+        return "0";
+            
     }
 }

@@ -27,8 +27,8 @@ public class Teacher extends User {
     // Teacher (User user,String major,ArrayList<String> teaching){
     //     this = (Teacher) user;
     // }
-    public Teacher(String id,String firstName, String lastName,String gender,String nationalID , String address, String phoneNumber,String email,String password,String major,boolean status) {
-        super(firstName,lastName, gender, nationalID, address, phoneNumber,email,password);
+    public Teacher(String id,String firstName, String lastName,String gender,String nationalID , String address, String phoneNumber,String email,String password,String major,boolean status,String dob) {
+        super(firstName,lastName, gender, nationalID, address, phoneNumber,email,password,dob);
         this.id = id;
         this.major = major;
         this.status = true;
@@ -38,8 +38,8 @@ public class Teacher extends User {
         User.listUser.put(this.id, this);
     }
     // register
-    public Teacher(String firstName,String lastName,String gender,String nationalID ,String address, String phoneNumber, String major) {
-        super(firstName,lastName, gender,nationalID,address, phoneNumber,EMAIL_FORMAT);
+    public Teacher(String firstName,String lastName,String gender,String nationalID ,String address, String phoneNumber, String major,String dob) {
+        super(firstName,lastName, gender,nationalID,address, phoneNumber,EMAIL_FORMAT,dob);
         super.id="T";
         super.id +=(String.valueOf(++numberOfTeacher));
         this.major = major;
@@ -102,8 +102,8 @@ public class Teacher extends User {
 
     public int registerToMySQL() throws SQLException {        
         int row = super.registerToMySQL();
-        String teacherQuery = "INSERT INTO Teachers (user_id, role_major,status) "
-        + "VALUES ('" + id + "', '" + major + "','"+status+"');";    
+        String teacherQuery = "INSERT INTO Teachers (user_id, major,status) "
+        + "VALUES ('" + id + "', '" + major + "','"+1+"');";    
         row += MySQLConnection.executeUpdate(teacherQuery);
         MySQLConnection.closeConnection();
         return row;
@@ -146,7 +146,8 @@ public class Teacher extends User {
                     String address = result.getString("address");
                     boolean status = result.getBoolean("status");
                     String major = result.getString("major");
-                    Teacher user = new Teacher( userId, firstName,lastName,gender,national_d,  address,  phone, userEmail, userPassword, major,status);              
+                    String dob = result.getString("dob");
+                    Teacher user = new Teacher( userId, firstName,lastName,gender,national_d,  address,  phone, userEmail, userPassword, major,status,dob);              
                 } 
             }catch(SQLException s){
               s.printStackTrace();

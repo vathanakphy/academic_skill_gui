@@ -7,6 +7,12 @@ package gui;
 import user.Student;
 import user.User;
 import  academic.*;
+import core.MySQLConnection;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -276,12 +282,12 @@ public class StudentEnrolment extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         String stuID = studentID.getText();
+            String stuID = studentID.getText();
+            System.err.println(stuID);
             String selectC = (String) this.selectCourse.getSelectedItem();
             stu = (Student) User.listUser.get(stuID);
             selectC = selectC.split(" ")[0];
             System.out.println(stu);
-            System.out.println(selectC);
             this.classEnrol =  CourseInstance.listCourseInstace.get(selectC);
             this.stuName1.setText(stu.getName());
             this.stuDob1.setText(stu.getDob());
@@ -297,13 +303,84 @@ public class StudentEnrolment extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-//        System.out.println(stu.getId());
-//        System.out.println(classEnrol);
-        System.out.println("Student Enrollment");
-//        studentID.setText("");
-//        stuInfor.setVisible(false);
-        // TODO need to fix bug
-        
+    String stuID = studentID.getText();
+    String input = (String) selectCourse.getSelectedItem();
+
+    if (input == null || input.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please select a course!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+        String[] parts = input.split("-");
+     if (parts.length != 4) {  // Should be exactly 4 parts
+         JOptionPane.showMessageDialog(null, "Invalid course format!", "Error", JOptionPane.ERROR_MESSAGE);
+         return;
+     }
+
+     String year = parts[0].trim();
+     String term = parts[1].trim();
+     String group = parts[2].trim();
+String shortName = parts[3].trim().split(" ")[0];
+    Connection connection = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        connection = MySQLConnection.getConnection();
+
+        // Debugging: Print query values before executing
+        System.out.println("Year: " + year);
+        System.out.println("Term: " + term);
+        System.out.println("Group: " + group);
+        System.out.println("Short Name: " + shortName);
+
+        // Query to get course_instance_id
+        String subQuery = "SELECT course_instance_id FROM Course_instance WHERE year = ? AND term = ? AND group_s = ? AND short_name = ?";
+        ps = connection.prepareStatement(subQuery);
+
+        // Use setString() if year and term are stored as VARCHAR in MySQL
+        ps.setString(1, year);  
+        ps.setString(2, term);  
+        ps.setString(3, group);  
+        ps.setString(4, shortName);  
+
+        System.out.println("Executing Query: " + ps.toString()); // Debug print SQL query
+
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            String courseInstanceId = rs.getString("course_instance_id");
+
+            // Insert enrollment
+            String insertQuery = "INSERT INTO Enrollment (student_id, payment_status, course_instance_id) VALUES (?, ?, ?)";
+            ps = connection.prepareStatement(insertQuery);
+            ps.setString(1, stuID);
+            ps.setInt(2, 1);
+            ps.setString(3, courseInstanceId);
+
+            int row = ps.executeUpdate();
+            if (row > 0) {
+                JOptionPane.showMessageDialog(null, "Enrollment Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Enrollment Failed!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No matching course_instance_id found!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    studentID.setText("");
+    stuInfor.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
